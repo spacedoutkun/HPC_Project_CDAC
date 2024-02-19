@@ -1,0 +1,51 @@
+hosts: HpcMaster
+  become: true
+  vars:
+    Network_to_allow: 192.168.2.0/24
+  tasks:
+    - name: Update apt cache and make sure nfs-kernel is installed
+      ansible.builtin.yum:
+        name: nfs-utils
+        state: present
+        update_cache: yes
+
+    - name: Install required packages
+      ansible.builtin.package:
+        name: parted
+        state: present
+
+    - name: Check for /dev/sdb1 partition
+      ansible.builtin.command: lsblk -ln
+      register: lsblk_output
+      changed_when: false
+
+    - name: Create partition onConnection to 192.168.144.206 closed by remote host.
+Connection to 192.168.144.206 closed. /dev/sdb mklabel gpt mkpart primary ext4 1MiB 100%
+PS C:\Users\rajesh>   t in lsblk_output.stdout"
+    - name: Wait for /dev/sdb1 to appear
+      ansible.builtin.wait_for:
+        path: /dev/sdb1
+        state: present
+
+    - name: Format /dev/sdb1 with ext4
+      ansible.builtin.filesystem:
+        fstype: ext4
+        dev: /dev/sdb1
+
+    - name: Create mount point
+      ansible.builtin.file:
+        path: /nfs
+        state: directory
+
+    - name: Mount /dev/sdb1
+      ansible.builtin.mount:
+        path: /nfs
+        src: /dev/sdb1
+        fstype: ext4
+        state: mounted
+        opts: defaults
+
+    - name: Ensure filesystem mounts on boot
+      ansible.builtin.lineinfile:
+        path: /etc/fstab
+-- INSERT --

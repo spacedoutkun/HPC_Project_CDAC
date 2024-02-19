@@ -1,0 +1,144 @@
+XCAT FINAL SCRIPT>>>>>
+
+
+# !/bin/bash
+# To declare static Array
+#arr=(1 2)
+
+
+# loops iterate through a
+# set of values until the
+# list (arr) is exhausted
+
+
+yum -y install yum-utils
+
+wget -P /etc/yum.repos.d https://xcat.org/files/xcat/repos/yum/latest/xcat-core/xcat-core.repo
+
+wget -P /etc/yum.repos.d https://xcat.org/files/xcat/repos/yum/xcat-dep/rh7/x86_64/xcat-dep.repo
+
+yum -y install xCAT
+
+. /etc/profile.d/xcat.sh
+
+
+ifconfig ens34 192.168.1.1 netmask 255.255.255.0 up
+
+chdef -t site dhcpinterfaces="xcatmn|ens34"
+
+copycds /root/CentOS-7-x86_64-DVD-1908.iso
+
+lsdef -t osimage
+
+#### NODE BOOTING WITH FOR LOOP ###########
+
+#!/bin/bash
+
+# Arrays of node names, IP addresses, and MAC addresses
+nodes=("hpc001" "hpc002" "hpc003")
+ips=("192.168.1.2" "192.168.1.3" "192.168.1.4")
+macs=("52:54:00:00:00:01" "52:54:00:00:00:02" "52:54:00:00:00:03")
+
+# Length of arrays
+length=${#nodes[@]}
+
+# Loop through the arrays
+for ((i=0; i<$length; i++))
+do
+    node="${nodes[$i]}"
+    ip="${ips[$i]}"
+    mac="${macs[$i]}"
+    
+    # Check if node definition already exists
+    if xcatdef=$(lsdef -t node "$node" 2>/dev/null); then
+        echo "Node definition for $node already exists. Skipping."
+    else
+        # Create node definition using mkdef
+        mkdef -t node "$node"
+        echo "Node definition for $node created."
+    fi
+    # Assign IP address and MAC address to the node
+    chdef -t node "$node" ip="$ip" mac="$mac"
+   chtab key=system passwd.username=root passwd.password=root
+    echo "Assigned IP address $ip and MAC address $mac to $node."
+done
+
+makehosts
+makenetworks
+makedhcp -n
+makedhcp -a
+makedns -n
+makedns -a
+
+nodeset compute osimage=centos7.7-x86_64-install-compute
+
+
+
+JENKINS MACHINE SETUP ...
+
+1) Jenkins PC
+
+----->
+       intall jenkins as a service ...
+https://www.linuxbuzz.com/install-jenkins-on-rhel-rockylinux-almalinux/#google_vignette
+
+------>install docker in rocky
+https://docs.rockylinux.org/gemstones/docker/
+
+->cat /etc/passwd 
+	jenkins if bin/bash false ....
+   then ,,, sudo usermod -s /bin/bash jenkins
+--> su - jenkins 
+---->chown -R  jenkins /demo 
+--> su - jenkins 
+ssh production@192.168.144.213
+if not,,,,then 
+
+---ssh-keygen -t rsa
+	---> ssh-copy-id root@192.168.144.213
+		----->now ssh root@192.168.144.213
+
+open browser localhost:8080 and paste below code for jenkins pipeline.....
+
+
+
+
+
+SLURM INSTALLATION SETUP>>>
+
+
+REPOSITORY ....
+
+https://github.com/Sandip1717/HPC-SLURM.git/
+
+JENKINS PIPELINE SCRIPT >>>>>
+
+pipeline{
+    agent any
+    
+    stages{
+        
+        stage('fetch-code'){
+            steps{
+                sh '''
+                ssh root@192.168.144.213 'cd /nfs/slurm-rpms/HPC-SLURM/ && git pull' 
+                '''
+            }
+        }
+        
+        stage('Run-code'){
+            steps{
+                sh '''
+                
+                
+                ssh root@192.168.144.213 'pip3 install virtualenv && cd /nfs/slurm-rpms/ && virtualenv venv && source venv/bin/activate && pip3 install numpy pandas sklearn && sbatch myscript1.sh'
+                '''
+            }
+        }
+    }
+}
+
+
+
+
+

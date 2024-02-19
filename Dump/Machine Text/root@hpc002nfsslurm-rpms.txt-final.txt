@@ -1,0 +1,1112 @@
+PowerShell 7.3.11
+
+   A new PowerShell stable release is available: v7.4.1
+   Upgrade now, or check out the release page at:
+     https://aka.ms/PowerShell-Release?tag=v7.4.1
+
+PS C:\Users\rajesh> ssh root@192.168.2.2
+ssh: connect to host 192.168.2.2 port 22: Connection timed out
+PS C:\Users\rajesh> ssh root@192.168.144.211
+The authenticity of host '192.168.144.211 (192.168.144.211)' can't be established.
+ED25519 key fingerprint is SHA256:XKGDY0tVSLceaXg46876DbuZsNYhJl8ZPIod3SP9WVc.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.144.211' (ED25519) to the list of known hosts.
+root@192.168.144.211's password:
+PS C:\Users\rajesh> ssh root@192.168.144.211
+root@192.168.144.211's password:
+Last failed login: Thu Feb 15 21:33:31 IST 2024 from 192.168.144.1 on ssh:notty
+There was 1 failed login attempt since the last successful login.
+Last login: Thu Feb 15 17:46:12 2024 from hpc003.demo.lab
+[root@hpc002 ~]#
+[root@hpc002 ~]# export MUNGEUSER=123
+[root@hpc002 ~]# groupadd -g $MUNGEUSER munge
+[root@hpc002 ~]# useradd  -m -c "MUNGE Uid 'N' Gid Emporium" -d /var/lib/munge -u $MUNGEUSER -g munge  -s /sbin/nologin munge
+[root@hpc002 ~]#
+[root@hpc002 ~]#
+[root@hpc002 ~]#
+[root@hpc002 ~]# export SLURMUSER=1234
+[root@hpc002 ~]#
+[root@hpc002 ~]#
+[root@hpc002 ~]# groupadd -g $SLURMUSER slurm
+[root@hpc002 ~]#
+[root@hpc002 ~]#
+[root@hpc002 ~]# useradd  -m -c "SLURM workload manager" -d /var/lib/slurm -u $SLURMUSER -g slurm  -s /bin/bash slurm
+[root@hpc002 ~]#
+[root@hpc002 ~]#
+[root@hpc002 ~]# yum install epel-release -y
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: centos.mirror.net.in
+ * extras: centos.mirror.net.in
+ * updates: centos.mirror.net.in
+Resolving Dependencies
+--> Running transaction check
+---> Package epel-release.noarch 0:7-11 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+====================================================================================================== Package                     Arch                  Version                Repository             Size
+======================================================================================================Installing:
+ epel-release                noarch                7-11                   extras                 15 k
+
+Transaction Summary
+======================================================================================================Install  1 Package
+
+Total download size: 15 k
+Installed size: 24 k
+Downloading packages:
+epel-release-7-11.noarch.rpm                                                   |  15 kB  00:00:00
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : epel-release-7-11.noarch                                                           1/1
+  Verifying  : epel-release-7-11.noarch                                                           1/1
+
+Installed:
+  epel-release.noarch 0:7-11
+
+Complete!
+[root@hpc002 ~]# yum install munge munge-libs munge-devel -y
+[root@hpc002 ~]# yum install munge munge-libs munge-devel -y
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+epel/x86_64/metalink                                                                                                                                                                      | 6.4 kB  00:00:00
+ * base: centos.mirror.net.in
+ * epel: repo.extreme-ix.org
+ * extras: centos.mirror.net.in
+ * updates: centos.mirror.net.in
+epel                                                                                                                                                                                      | 4.7 kB  00:00:00
+(1/3): epel/x86_64/group_gz                                                                                                                                                               | 100 kB  00:00:00
+epel/x86_64/updateinfo         FAILED
+https://epel.sg.ssimn.org/7/x86_64/repodata/5c12d1bf5cac7d63c718c53a84ba538494562ffcec6263c26ab5774d04e673bd-updateinfo.xml.bz2: [Errno 14] HTTPS Error 403 - Forbidden        ]  0.0 B/s |    0 B  --:--:-- ETA
+Trying other mirror.
+To address this issue please refer to the below wiki article
+
+https://wiki.centos.org/yum-errors
+
+If above article doesn't help to resolve this issue please use https://bugs.centos.org/.
+
+(2/3): epel/x86_64/updateinfo                                                                                                                                                             | 1.0 MB  00:00:00
+(3/3): epel/x86_64/primary_db                                                                                                                                                             | 7.0 MB  00:00:03
+Resolving Dependencies
+--> Running transaction check
+---> Package munge.x86_64 0:0.5.11-3.el7 will be installed
+---> Package munge-devel.x86_64 0:0.5.11-3.el7 will be installed
+---> Package munge-libs.x86_64 0:0.5.11-3.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================================================================================================================================================= Package                                              Arch                                            Version                                                Repository                                     Size
+=================================================================================================================================================================================================================Installing:
+ munge                                                x86_64                                          0.5.11-3.el7                                           epel                                           95 k
+ munge-devel                                          x86_64                                          0.5.11-3.el7                                           epel                                           22 k
+ munge-libs                                           x86_64                                          0.5.11-3.el7                                           epel                                           37 k
+
+Transaction Summary
+=================================================================================================================================================================================================================Install  3 Packages
+
+Total download size: 154 k
+Installed size: 341 k
+Downloading packages:
+warning: /var/cache/yum/x86_64/7/epel/packages/munge-0.5.11-3.el7.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID 352c64e5: NOKEY                                           ]  0.0 B/s |    0 B  --:--:-- ETA
+Public key for munge-0.5.11-3.el7.x86_64.rpm is not installed
+(1/3): munge-0.5.11-3.el7.x86_64.rpm                                                                                                                                                      |  95 kB  00:00:00
+(2/3): munge-libs-0.5.11-3.el7.x86_64.rpm                                                                                                                                                 |  37 kB  00:00:00
+(3/3): munge-devel-0.5.11-3.el7.x86_64.rpm                                                                                                                                                |  22 kB  00:00:01
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------Total                                                                                                                                                                            143 kB/s | 154 kB  00:00:01
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+Importing GPG key 0x352C64E5:
+ Userid     : "Fedora EPEL (7) <epel@fedoraproject.org>"
+ Fingerprint: 91e9 7d7c 4a5e 96f1 7f3e 888f 6a2f aea2 352c 64e5
+ Package    : epel-release-7-11.noarch (@extras)
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : munge-libs-0.5.11-3.el7.x86_64                                                                                                                                                                1/3
+  Installing : munge-0.5.11-3.el7.x86_64                                                                                                                                                                     2/3
+  Installing : munge-devel-0.5.11-3.el7.x86_64                                                                                                                                                               3/3
+  Verifying  : munge-0.5.11-3.el7.x86_64                                                                                                                                                                     1/3
+  Verifying  : munge-devel-0.5.11-3.el7.x86_64                                                                                                                                                               2/3
+  Verifying  : munge-libs-0.5.11-3.el7.x86_64                                                                                                                                                                3/3
+
+Installed:
+  munge.x86_64 0:0.5.11-3.el7                                      munge-devel.x86_64 0:0.5.11-3.el7                                      munge-libs.x86_64 0:0.5.11-3.el7
+
+Complete!
+[root@hpc002 ~]#
+[root@hpc002 ~]# chown -R munge: /etc/munge/ /var/log/munge/
+[root@hpc002 ~]#
+[root@hpc002 ~]# chmod 0700 /etc/munge/ /var/log/munge/
+[root@hpc002 ~]#
+[root@hpc002 ~]# systemctl enable munge
+Created symlink from /etc/systemd/system/multi-user.target.wants/munge.service to /usr/lib/systemd/system/munge.service.
+[root@hpc002 ~]#
+[root@hpc002 ~]# systemctl start munge
+[root@hpc002 ~]# munge -n
+MUNGE:AwQDAACjeLCpAGUS4fVQPPBMaVOeh2/nwVgBbNLsOdZNsh4ytFtSYAS/S50HbO9/TbieRM5jUJXke6Pgn62MGGd/VHZddQYHeflMTGw7mElmDxOm5kB7EZw=:
+[root@hpc002 ~]#
+[root@hpc002 ~]# munge -n | munge
+MUNGE:AwQDAADLERg1fGvxodxronG/h34LyjOQu3zSBKoJwF/8ns+3GKrVM70HsttpgHFVWLNXKlZ+GFTTEM7IaFrd83d6xMN13h4Fw+z4GWEwlc2Jxqg6CHD2H3TWmw6zVjDoXuiCH7IMy6bFH59gvLe7id8uvd/ULaCBHUvmillQTrn58BDTCCWieBca4bgEL/lWHYORSR3I4CGx1alDSfqd9dQUFaXw9ZHcqNwnxnRohSSnPCYQdsa7vGCBW39a+hqSy+8OBFYKAxsLO9ayg82jvXgnws/PVTueoA==:
+[root@hpc002 ~]#
+[root@hpc002 ~]#
+[root@hpc002 ~]# remunge
+2024-02-15 21:49:35 Spawning 1 thread for encoding
+2024-02-15 21:49:35 Processing credentials for 1 second
+2024-02-15 21:49:36 Processed 5784 credentials in 1.000s (5782 creds/sec)
+[root@hpc002 ~]# yum install openssl openssl-devel pam-devel numactl numactl-devel hwloc hwloc-devel lua lua-devel readline-devel rrdtool-devel ncurses-devel man2html libibmad libibumad perl-ExtUtils-MakeMaker python3 gcc–y
+[root@hpc002 ~]# df -h
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                 1.9G     0  1.9G   0% /dev
+tmpfs                    1.9G     0  1.9G   0% /dev/shm
+tmpfs                    1.9G   12M  1.9G   1% /run
+tmpfs                    1.9G     0  1.9G   0% /sys/fs/cgroup
+/dev/mapper/xcatvg-root   18G  1.7G   16G  10% /
+/dev/sda1                509M  145M  365M  29% /boot
+tmpfs                    378M     0  378M   0% /run/user/0
+192.168.2.1:/nfs          50G   52M   47G   1% /nfs
+[root@hpc002 ~]# yum --nogpgcheck localinstall *
+Loaded plugins: fastestmirror
+Skipping: anaconda-ks.cfg, filename does not end in .rpm.
+Skipping: history1.txt, filename does not end in .rpm.
+Skipping: original-ks.cfg, filename does not end in .rpm.
+Nothing to do
+[root@hpc002 ~]# yum --nogpgcheck localinstall*
+Loaded plugins: fastestmirror
+No such command: localinstall*. Please use /usr/bin/yum --help
+[root@hpc002 ~]# yum --nogpgcheck localinstall *
+Loaded plugins: fastestmirror
+Skipping: anaconda-ks.cfg, filename does not end in .rpm.
+Skipping: history1.txt, filename does not end in .rpm.
+Skipping: original-ks.cfg, filename does not end in .rpm.
+Nothing to do
+[root@hpc002 ~]# cd /nfs/slurm-rpms/
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# ls
+slurm-21.08.8-2.el7.x86_64.rpm           slurm-example-configs-21.08.8-2.el7.x86_64.rpm  slurm-pam_slurm-21.08.8-2.el7.x86_64.rpm  slurm-slurmd-21.08.8-2.el7.x86_64.rpm
+slurm-contribs-21.08.8-2.el7.x86_64.rpm  slurm-libpmi-21.08.8-2.el7.x86_64.rpm           slurm-perlapi-21.08.8-2.el7.x86_64.rpm    slurm-slurmdbd-21.08.8-2.el7.x86_64.rpm
+slurm-devel-21.08.8-2.el7.x86_64.rpm     slurm-openlava-21.08.8-2.el7.x86_64.rpm         slurm-slurmctld-21.08.8-2.el7.x86_64.rpm  slurm-torque-21.08.8-2.el7.x86_64.rpm
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# yum --nogpgcheck localinstall *
+Loaded plugins: fastestmirror
+Examining slurm-21.08.8-2.el7.x86_64.rpm: slurm-21.08.8-2.el7.x86_64
+Marking slurm-21.08.8-2.el7.x86_64.rpm to be installed
+Examining slurm-contribs-21.08.8-2.el7.x86_64.rpm: slurm-contribs-21.08.8-2.el7.x86_64
+Marking slurm-contribs-21.08.8-2.el7.x86_64.rpm to be installed
+Examining slurm-devel-21.08.8-2.el7.x86_64.rpm: slurm-devel-21.08.8-2.el7.x86_64
+Marking slurm-devel-21.08.8-2.el7.x86_64.rpm to be installed
+Examining slurm-example-configs-21.08.8-2.el7.x86_64.rpm: slurm-example-configs-21.08.8-2.el7.x86_64
+Marking slurm-example-configs-21.08.8-2.el7.x86_64.rpm to be installed
+Examining slurm-libpmi-21.08.8-2.el7.x86_64.rpm: slurm-libpmi-21.08.8-2.el7.x86_64
+Marking slurm-libpmi-21.08.8-2.el7.x86_64.rpm to be installed
+Examining slurm-openlava-21.08.8-2.el7.x86_64.rpm: slurm-openlava-21.08.8-2.el7.x86_64
+Marking slurm-openlava-21.08.8-2.el7.x86_64.rpm to be installed
+Examining slurm-pam_slurm-21.08.8-2.el7.x86_64.rpm: slurm-pam_slurm-21.08.8-2.el7.x86_64
+Marking slurm-pam_slurm-21.08.8-2.el7.x86_64.rpm to be installed
+Examining slurm-perlapi-21.08.8-2.el7.x86_64.rpm: slurm-perlapi-21.08.8-2.el7.x86_64
+Marking slurm-perlapi-21.08.8-2.el7.x86_64.rpm to be installed
+Examining slurm-slurmctld-21.08.8-2.el7.x86_64.rpm: slurm-slurmctld-21.08.8-2.el7.x86_64
+Marking slurm-slurmctld-21.08.8-2.el7.x86_64.rpm to be installed
+Examining slurm-slurmd-21.08.8-2.el7.x86_64.rpm: slurm-slurmd-21.08.8-2.el7.x86_64
+Marking slurm-slurmd-21.08.8-2.el7.x86_64.rpm to be installed
+Examining slurm-slurmdbd-21.08.8-2.el7.x86_64.rpm: slurm-slurmdbd-21.08.8-2.el7.x86_64
+Marking slurm-slurmdbd-21.08.8-2.el7.x86_64.rpm to be installed
+Examining slurm-torque-21.08.8-2.el7.x86_64.rpm: slurm-torque-21.08.8-2.el7.x86_64
+Marking slurm-torque-21.08.8-2.el7.x86_64.rpm to be installed
+Resolving Dependencies
+--> Running transaction check
+---> Package slurm.x86_64 0:21.08.8-2.el7 will be installed
+--> Processing Dependency: librrd.so.4()(64bit) for package: slurm-21.08.8-2.el7.x86_64
+Loading mirror speeds from cached hostfile
+ * base: centos.mirror.net.in
+ * epel: repo.extreme-ix.org
+ * extras: centos.mirror.net.in
+ * updates: centos.mirror.net.in
+---> Package slurm-contribs.x86_64 0:21.08.8-2.el7 will be installed
+---> Package slurm-devel.x86_64 0:21.08.8-2.el7 will be installed
+---> Package slurm-example-configs.x86_64 0:21.08.8-2.el7 will be installed
+---> Package slurm-libpmi.x86_64 0:21.08.8-2.el7 will be installed
+---> Package slurm-openlava.x86_64 0:21.08.8-2.el7 will be installed
+--> Processing Dependency: perl(Switch) for package: slurm-openlava-21.08.8-2.el7.x86_64
+---> Package slurm-pam_slurm.x86_64 0:21.08.8-2.el7 will be installed
+---> Package slurm-perlapi.x86_64 0:21.08.8-2.el7 will be installed
+---> Package slurm-slurmctld.x86_64 0:21.08.8-2.el7 will be installed
+---> Package slurm-slurmd.x86_64 0:21.08.8-2.el7 will be installed
+--> Processing Dependency: libhwloc.so.5()(64bit) for package: slurm-slurmd-21.08.8-2.el7.x86_64
+---> Package slurm-slurmdbd.x86_64 0:21.08.8-2.el7 will be installed
+---> Package slurm-torque.x86_64 0:21.08.8-2.el7 will be installed
+--> Running transaction check
+---> Package hwloc-libs.x86_64 0:1.11.8-4.el7 will be installed
+---> Package perl-Switch.noarch 0:2.16-7.el7 will be installed
+---> Package rrdtool.x86_64 0:1.4.8-9.el7 will be installed
+--> Processing Dependency: dejavu-sans-mono-fonts for package: rrdtool-1.4.8-9.el7.x86_64
+--> Processing Dependency: libpangocairo-1.0.so.0()(64bit) for package: rrdtool-1.4.8-9.el7.x86_64
+--> Processing Dependency: libpango-1.0.so.0()(64bit) for package: rrdtool-1.4.8-9.el7.x86_64
+--> Processing Dependency: libcairo.so.2()(64bit) for package: rrdtool-1.4.8-9.el7.x86_64
+--> Running transaction check
+---> Package cairo.x86_64 0:1.15.12-4.el7 will be installed
+--> Processing Dependency: libxcb.so.1()(64bit) for package: cairo-1.15.12-4.el7.x86_64
+--> Processing Dependency: libxcb-shm.so.0()(64bit) for package: cairo-1.15.12-4.el7.x86_64
+--> Processing Dependency: libxcb-render.so.0()(64bit) for package: cairo-1.15.12-4.el7.x86_64
+--> Processing Dependency: libpixman-1.so.0()(64bit) for package: cairo-1.15.12-4.el7.x86_64
+--> Processing Dependency: libfontconfig.so.1()(64bit) for package: cairo-1.15.12-4.el7.x86_64
+--> Processing Dependency: libXrender.so.1()(64bit) for package: cairo-1.15.12-4.el7.x86_64
+--> Processing Dependency: libXext.so.6()(64bit) for package: cairo-1.15.12-4.el7.x86_64
+--> Processing Dependency: libX11.so.6()(64bit) for package: cairo-1.15.12-4.el7.x86_64
+--> Processing Dependency: libGL.so.1()(64bit) for package: cairo-1.15.12-4.el7.x86_64
+--> Processing Dependency: libEGL.so.1()(64bit) for package: cairo-1.15.12-4.el7.x86_64
+---> Package dejavu-sans-mono-fonts.noarch 0:2.33-6.el7 will be installed
+--> Processing Dependency: dejavu-fonts-common = 2.33-6.el7 for package: dejavu-sans-mono-fonts-2.33-6.el7.noarch
+---> Package pango.x86_64 0:1.42.4-4.el7_7 will be installed
+--> Processing Dependency: libthai(x86-64) >= 0.1.9 for package: pango-1.42.4-4.el7_7.x86_64
+--> Processing Dependency: libXft(x86-64) >= 2.0.0 for package: pango-1.42.4-4.el7_7.x86_64
+--> Processing Dependency: harfbuzz(x86-64) >= 1.4.2 for package: pango-1.42.4-4.el7_7.x86_64
+--> Processing Dependency: fribidi(x86-64) >= 1.0 for package: pango-1.42.4-4.el7_7.x86_64
+--> Processing Dependency: libthai.so.0(LIBTHAI_0.1)(64bit) for package: pango-1.42.4-4.el7_7.x86_64
+--> Processing Dependency: libthai.so.0()(64bit) for package: pango-1.42.4-4.el7_7.x86_64
+--> Processing Dependency: libharfbuzz.so.0()(64bit) for package: pango-1.42.4-4.el7_7.x86_64
+--> Processing Dependency: libfribidi.so.0()(64bit) for package: pango-1.42.4-4.el7_7.x86_64
+--> Processing Dependency: libXft.so.2()(64bit) for package: pango-1.42.4-4.el7_7.x86_64
+--> Running transaction check
+---> Package dejavu-fonts-common.noarch 0:2.33-6.el7 will be installed
+--> Processing Dependency: fontpackages-filesystem for package: dejavu-fonts-common-2.33-6.el7.noarch
+---> Package fontconfig.x86_64 0:2.13.0-4.3.el7 will be installed
+--> Processing Dependency: dejavu-sans-fonts for package: fontconfig-2.13.0-4.3.el7.x86_64
+---> Package fribidi.x86_64 0:1.0.2-1.el7_7.1 will be installed
+---> Package harfbuzz.x86_64 0:1.7.5-2.el7 will be installed
+--> Processing Dependency: libgraphite2.so.3()(64bit) for package: harfbuzz-1.7.5-2.el7.x86_64
+---> Package libX11.x86_64 0:1.6.7-4.el7_9 will be installed
+--> Processing Dependency: libX11-common >= 1.6.7-4.el7_9 for package: libX11-1.6.7-4.el7_9.x86_64
+---> Package libXext.x86_64 0:1.3.3-3.el7 will be installed
+---> Package libXft.x86_64 0:2.3.2-2.el7 will be installed
+---> Package libXrender.x86_64 0:0.9.10-1.el7 will be installed
+---> Package libglvnd-egl.x86_64 1:1.0.1-0.8.git5baa1e5.el7 will be installed
+--> Processing Dependency: libglvnd(x86-64) = 1:1.0.1-0.8.git5baa1e5.el7 for package: 1:libglvnd-egl-1.0.1-0.8.git5baa1e5.el7.x86_64
+--> Processing Dependency: mesa-libEGL(x86-64) >= 13.0.4-1 for package: 1:libglvnd-egl-1.0.1-0.8.git5baa1e5.el7.x86_64
+--> Processing Dependency: libGLdispatch.so.0()(64bit) for package: 1:libglvnd-egl-1.0.1-0.8.git5baa1e5.el7.x86_64
+---> Package libglvnd-glx.x86_64 1:1.0.1-0.8.git5baa1e5.el7 will be installed
+--> Processing Dependency: mesa-libGL(x86-64) >= 13.0.4-1 for package: 1:libglvnd-glx-1.0.1-0.8.git5baa1e5.el7.x86_64
+---> Package libthai.x86_64 0:0.1.14-9.el7 will be installed
+---> Package libxcb.x86_64 0:1.13-1.el7 will be installed
+--> Processing Dependency: libXau.so.6()(64bit) for package: libxcb-1.13-1.el7.x86_64
+---> Package pixman.x86_64 0:0.34.0-1.el7 will be installed
+--> Running transaction check
+---> Package dejavu-sans-fonts.noarch 0:2.33-6.el7 will be installed
+---> Package fontpackages-filesystem.noarch 0:1.44-8.el7 will be installed
+---> Package graphite2.x86_64 0:1.3.10-1.el7_3 will be installed
+---> Package libX11-common.noarch 0:1.6.7-4.el7_9 will be installed
+---> Package libXau.x86_64 0:1.0.8-2.1.el7 will be installed
+---> Package libglvnd.x86_64 1:1.0.1-0.8.git5baa1e5.el7 will be installed
+---> Package mesa-libEGL.x86_64 0:18.3.4-12.el7_9 will be installed
+--> Processing Dependency: mesa-libgbm = 18.3.4-12.el7_9 for package: mesa-libEGL-18.3.4-12.el7_9.x86_64
+--> Processing Dependency: libxshmfence.so.1()(64bit) for package: mesa-libEGL-18.3.4-12.el7_9.x86_64
+--> Processing Dependency: libwayland-server.so.0()(64bit) for package: mesa-libEGL-18.3.4-12.el7_9.x86_64
+--> Processing Dependency: libwayland-client.so.0()(64bit) for package: mesa-libEGL-18.3.4-12.el7_9.x86_64
+--> Processing Dependency: libglapi.so.0()(64bit) for package: mesa-libEGL-18.3.4-12.el7_9.x86_64
+--> Processing Dependency: libgbm.so.1()(64bit) for package: mesa-libEGL-18.3.4-12.el7_9.x86_64
+---> Package mesa-libGL.x86_64 0:18.3.4-12.el7_9 will be installed
+--> Processing Dependency: libXxf86vm.so.1()(64bit) for package: mesa-libGL-18.3.4-12.el7_9.x86_64
+--> Processing Dependency: libXfixes.so.3()(64bit) for package: mesa-libGL-18.3.4-12.el7_9.x86_64
+--> Processing Dependency: libXdamage.so.1()(64bit) for package: mesa-libGL-18.3.4-12.el7_9.x86_64
+--> Running transaction check
+---> Package libXdamage.x86_64 0:1.1.4-4.1.el7 will be installed
+---> Package libXfixes.x86_64 0:5.0.3-1.el7 will be installed
+---> Package libXxf86vm.x86_64 0:1.1.4-1.el7 will be installed
+---> Package libwayland-client.x86_64 0:1.15.0-1.el7 will be installed
+---> Package libwayland-server.x86_64 0:1.15.0-1.el7 will be installed
+---> Package libxshmfence.x86_64 0:1.2-1.el7 will be installed
+---> Package mesa-libgbm.x86_64 0:18.3.4-12.el7_9 will be installed
+---> Package mesa-libglapi.x86_64 0:18.3.4-12.el7_9 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================================================================================================================================================= Package                                          Arch                            Version                                             Repository                                                            Size
+=================================================================================================================================================================================================================Installing:
+ slurm                                            x86_64                          21.08.8-2.el7                                       /slurm-21.08.8-2.el7.x86_64                                           62 M
+ slurm-contribs                                   x86_64                          21.08.8-2.el7                                       /slurm-contribs-21.08.8-2.el7.x86_64                                  31 k
+ slurm-devel                                      x86_64                          21.08.8-2.el7                                       /slurm-devel-21.08.8-2.el7.x86_64                                    363 k
+ slurm-example-configs                            x86_64                          21.08.8-2.el7                                       /slurm-example-configs-21.08.8-2.el7.x86_64                           14 k
+ slurm-libpmi                                     x86_64                          21.08.8-2.el7                                       /slurm-libpmi-21.08.8-2.el7.x86_64                                   463 k
+ slurm-openlava                                   x86_64                          21.08.8-2.el7                                       /slurm-openlava-21.08.8-2.el7.x86_64                                  24 k
+ slurm-pam_slurm                                  x86_64                          21.08.8-2.el7                                       /slurm-pam_slurm-21.08.8-2.el7.x86_64                                465 k
+ slurm-perlapi                                    x86_64                          21.08.8-2.el7                                       /slurm-perlapi-21.08.8-2.el7.x86_64                                  3.1 M
+ slurm-slurmctld                                  x86_64                          21.08.8-2.el7                                       /slurm-slurmctld-21.08.8-2.el7.x86_64                                4.0 M
+ slurm-slurmd                                     x86_64                          21.08.8-2.el7                                       /slurm-slurmd-21.08.8-2.el7.x86_64                                   2.3 M
+ slurm-slurmdbd                                   x86_64                          21.08.8-2.el7                                       /slurm-slurmdbd-21.08.8-2.el7.x86_64                                 2.3 M
+ slurm-torque                                     x86_64                          21.08.8-2.el7                                       /slurm-torque-21.08.8-2.el7.x86_64                                   396 k
+Installing for dependencies:
+ cairo                                            x86_64                          1.15.12-4.el7                                       base                                                                 741 k
+ dejavu-fonts-common                              noarch                          2.33-6.el7                                          base                                                                  64 k
+ dejavu-sans-fonts                                noarch                          2.33-6.el7                                          base                                                                 1.4 M
+ dejavu-sans-mono-fonts                           noarch                          2.33-6.el7                                          base                                                                 433 k
+ fontconfig                                       x86_64                          2.13.0-4.3.el7                                      base                                                                 254 k
+ fontpackages-filesystem                          noarch                          1.44-8.el7                                          base                                                                 9.9 k
+ fribidi                                          x86_64                          1.0.2-1.el7_7.1                                     base                                                                  79 k
+ graphite2                                        x86_64                          1.3.10-1.el7_3                                      base                                                                 115 k
+ harfbuzz                                         x86_64                          1.7.5-2.el7                                         base                                                                 267 k
+ hwloc-libs                                       x86_64                          1.11.8-4.el7                                        base                                                                 1.6 M
+ libX11                                           x86_64                          1.6.7-4.el7_9                                       updates                                                              607 k
+ libX11-common                                    noarch                          1.6.7-4.el7_9                                       updates                                                              164 k
+ libXau                                           x86_64                          1.0.8-2.1.el7                                       base                                                                  29 k
+ libXdamage                                       x86_64                          1.1.4-4.1.el7                                       base                                                                  20 k
+ libXext                                          x86_64                          1.3.3-3.el7                                         base                                                                  39 k
+ libXfixes                                        x86_64                          5.0.3-1.el7                                         base                                                                  18 k
+ libXft                                           x86_64                          2.3.2-2.el7                                         base                                                                  58 k
+ libXrender                                       x86_64                          0.9.10-1.el7                                        base                                                                  26 k
+ libXxf86vm                                       x86_64                          1.1.4-1.el7                                         base                                                                  18 k
+ libglvnd                                         x86_64                          1:1.0.1-0.8.git5baa1e5.el7                          base                                                                  89 k
+ libglvnd-egl                                     x86_64                          1:1.0.1-0.8.git5baa1e5.el7                          base                                                                  44 k
+ libglvnd-glx                                     x86_64                          1:1.0.1-0.8.git5baa1e5.el7                          base                                                                 125 k
+ libthai                                          x86_64                          0.1.14-9.el7                                        base                                                                 187 k
+ libwayland-client                                x86_64                          1.15.0-1.el7                                        base                                                                  33 k
+ libwayland-server                                x86_64                          1.15.0-1.el7                                        base                                                                  39 k
+ libxcb                                           x86_64                          1.13-1.el7                                          base                                                                 214 k
+ libxshmfence                                     x86_64                          1.2-1.el7                                           base                                                                 7.2 k
+ mesa-libEGL                                      x86_64                          18.3.4-12.el7_9                                     updates                                                              110 k
+ mesa-libGL                                       x86_64                          18.3.4-12.el7_9                                     updates                                                              166 k
+ mesa-libgbm                                      x86_64                          18.3.4-12.el7_9                                     updates                                                               39 k
+ mesa-libglapi                                    x86_64                          18.3.4-12.el7_9                                     updates                                                               46 k
+ pango                                            x86_64                          1.42.4-4.el7_7                                      base                                                                 280 k
+ perl-Switch                                      noarch                          2.16-7.el7                                          base                                                                  22 k
+ pixman                                           x86_64                          0.34.0-1.el7                                        base                                                                 248 k
+ rrdtool                                          x86_64                          1.4.8-9.el7                                         base                                                                 440 k
+
+Transaction Summary
+=================================================================================================================================================================================================================Install  12 Packages (+35 Dependent packages)
+
+Total size: 84 M
+Total download size: 7.9 M
+Installed size: 99 M
+Is this ok [y/d/N]: y
+Downloading packages:
+(1/35): dejavu-fonts-common-2.33-6.el7.noarch.rpm                                                                                                                                         |  64 kB  00:00:00
+(2/35): dejavu-sans-mono-fonts-2.33-6.el7.noarch.rpm                                                                                                                                      | 433 kB  00:00:00
+(3/35): cairo-1.15.12-4.el7.x86_64.rpm                                                                                                                                                    | 741 kB  00:00:01
+(4/35): fribidi-1.0.2-1.el7_7.1.x86_64.rpm                                                                                                                                                |  79 kB  00:00:00
+(5/35): fontconfig-2.13.0-4.3.el7.x86_64.rpm                                                                                                                                              | 254 kB  00:00:00
+(6/35): fontpackages-filesystem-1.44-8.el7.noarch.rpm                                                                                                                                     | 9.9 kB  00:00:00
+(7/35): graphite2-1.3.10-1.el7_3.x86_64.rpm                                                                                                                                               | 115 kB  00:00:00
+(8/35): harfbuzz-1.7.5-2.el7.x86_64.rpm                                                                                                                                                   | 267 kB  00:00:00
+(9/35): libXau-1.0.8-2.1.el7.x86_64.rpm                                                                                                                                                   |  29 kB  00:00:00
+(10/35): libXdamage-1.1.4-4.1.el7.x86_64.rpm                                                                                                                                              |  20 kB  00:00:00
+(11/35): dejavu-sans-fonts-2.33-6.el7.noarch.rpm                                                                                                                                          | 1.4 MB  00:00:02
+(12/35): libXext-1.3.3-3.el7.x86_64.rpm                                                                                                                                                   |  39 kB  00:00:00
+(13/35): libX11-common-1.6.7-4.el7_9.noarch.rpm                                                                                                                                           | 164 kB  00:00:00
+(14/35): libXfixes-5.0.3-1.el7.x86_64.rpm                                                                                                                                                 |  18 kB  00:00:00
+(15/35): libXxf86vm-1.1.4-1.el7.x86_64.rpm                                                                                                                                                |  18 kB  00:00:00
+(16/35): libXft-2.3.2-2.el7.x86_64.rpm                                                                                                                                                    |  58 kB  00:00:00
+(17/35): libXrender-0.9.10-1.el7.x86_64.rpm                                                                                                                                               |  26 kB  00:00:00
+(18/35): libglvnd-egl-1.0.1-0.8.git5baa1e5.el7.x86_64.rpm                                                                                                                                 |  44 kB  00:00:00
+(19/35): libglvnd-1.0.1-0.8.git5baa1e5.el7.x86_64.rpm                                                                                                                                     |  89 kB  00:00:00
+(20/35): libthai-0.1.14-9.el7.x86_64.rpm                                                                                                                                                  | 187 kB  00:00:00
+(21/35): libwayland-client-1.15.0-1.el7.x86_64.rpm                                                                                                                                        |  33 kB  00:00:00
+(22/35): libwayland-server-1.15.0-1.el7.x86_64.rpm                                                                                                                                        |  39 kB  00:00:00
+(23/35): libxshmfence-1.2-1.el7.x86_64.rpm                                                                                                                                                | 7.2 kB  00:00:00
+(24/35): libglvnd-glx-1.0.1-0.8.git5baa1e5.el7.x86_64.rpm                                                                                                                                 | 125 kB  00:00:00
+(25/35): libxcb-1.13-1.el7.x86_64.rpm                                                                                                                                                     | 214 kB  00:00:00
+(26/35): mesa-libgbm-18.3.4-12.el7_9.x86_64.rpm                                                                                                                                           |  39 kB  00:00:00
+(27/35): mesa-libglapi-18.3.4-12.el7_9.x86_64.rpm                                                                                                                                         |  46 kB  00:00:00
+(28/35): pango-1.42.4-4.el7_7.x86_64.rpm                                                                                                                                                  | 280 kB  00:00:00
+(29/35): perl-Switch-2.16-7.el7.noarch.rpm                                                                                                                                                |  22 kB  00:00:00
+(30/35): mesa-libEGL-18.3.4-12.el7_9.x86_64.rpm                                                                                                                                           | 110 kB  00:00:00
+(31/35): pixman-0.34.0-1.el7.x86_64.rpm                                                                                                                                                   | 248 kB  00:00:00
+(32/35): hwloc-libs-1.11.8-4.el7.x86_64.rpm                                                                                                                                               | 1.6 MB  00:00:01
+(33/35): mesa-libGL-18.3.4-12.el7_9.x86_64.rpm                                                                                                                                            | 166 kB  00:00:00
+(34/35): rrdtool-1.4.8-9.el7.x86_64.rpm                                                                                                                                                   | 440 kB  00:00:00
+(35/35): libX11-1.6.7-4.el7_9.x86_64.rpm                                                                                                                                                  | 607 kB  00:00:01
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------Total                                                                                                                                                                            2.2 MB/s | 7.9 MB  00:00:03
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : mesa-libglapi-18.3.4-12.el7_9.x86_64                                                                                                                                                         1/47
+  Installing : libxshmfence-1.2-1.el7.x86_64                                                                                                                                                                2/47
+  Installing : 1:libglvnd-1.0.1-0.8.git5baa1e5.el7.x86_64                                                                                                                                                   3/47
+  Installing : fontpackages-filesystem-1.44-8.el7.noarch                                                                                                                                                    4/47
+  Installing : dejavu-fonts-common-2.33-6.el7.noarch                                                                                                                                                        5/47
+  Installing : libwayland-server-1.15.0-1.el7.x86_64                                                                                                                                                        6/47
+  Installing : mesa-libgbm-18.3.4-12.el7_9.x86_64                                                                                                                                                           7/47
+  Installing : dejavu-sans-fonts-2.33-6.el7.noarch                                                                                                                                                          8/47
+  Installing : fontconfig-2.13.0-4.3.el7.x86_64                                                                                                                                                             9/47
+  Installing : dejavu-sans-mono-fonts-2.33-6.el7.noarch                                                                                                                                                    10/47
+  Installing : libX11-common-1.6.7-4.el7_9.noarch                                                                                                                                                          11/47
+  Installing : hwloc-libs-1.11.8-4.el7.x86_64                                                                                                                                                              12/47
+  Installing : graphite2-1.3.10-1.el7_3.x86_64                                                                                                                                                             13/47
+  Installing : harfbuzz-1.7.5-2.el7.x86_64                                                                                                                                                                 14/47
+  Installing : perl-Switch-2.16-7.el7.noarch                                                                                                                                                               15/47
+  Installing : libXau-1.0.8-2.1.el7.x86_64                                                                                                                                                                 16/47
+  Installing : libxcb-1.13-1.el7.x86_64                                                                                                                                                                    17/47
+  Installing : libX11-1.6.7-4.el7_9.x86_64                                                                                                                                                                 18/47
+  Installing : libXext-1.3.3-3.el7.x86_64                                                                                                                                                                  19/47
+  Installing : libXrender-0.9.10-1.el7.x86_64                                                                                                                                                              20/47
+  Installing : libXfixes-5.0.3-1.el7.x86_64                                                                                                                                                                21/47
+  Installing : libXdamage-1.1.4-4.1.el7.x86_64                                                                                                                                                             22/47
+  Installing : libXft-2.3.2-2.el7.x86_64                                                                                                                                                                   23/47
+  Installing : libXxf86vm-1.1.4-1.el7.x86_64                                                                                                                                                               24/47
+  Installing : 1:libglvnd-glx-1.0.1-0.8.git5baa1e5.el7.x86_64                                                                                                                                              25/47
+  Installing : mesa-libGL-18.3.4-12.el7_9.x86_64                                                                                                                                                           26/47
+  Installing : pixman-0.34.0-1.el7.x86_64                                                                                                                                                                  27/47
+  Installing : libthai-0.1.14-9.el7.x86_64                                                                                                                                                                 28/47
+  Installing : fribidi-1.0.2-1.el7_7.1.x86_64                                                                                                                                                              29/47
+  Installing : libwayland-client-1.15.0-1.el7.x86_64                                                                                                                                                       30/47
+  Installing : 1:libglvnd-egl-1.0.1-0.8.git5baa1e5.el7.x86_64                                                                                                                                              31/47
+  Installing : mesa-libEGL-18.3.4-12.el7_9.x86_64                                                                                                                                                          32/47
+  Installing : cairo-1.15.12-4.el7.x86_64                                                                                                                                                                  33/47
+  Installing : pango-1.42.4-4.el7_7.x86_64                                                                                                                                                                 34/47
+  Installing : rrdtool-1.4.8-9.el7.x86_64                                                                                                                                                                  35/47
+  Installing : slurm-21.08.8-2.el7.x86_64                                                                                                                                                                  36/47
+  Installing : slurm-perlapi-21.08.8-2.el7.x86_64                                                                                                                                                          37/47
+  Installing : slurm-contribs-21.08.8-2.el7.x86_64                                                                                                                                                         38/47
+  Installing : slurm-torque-21.08.8-2.el7.x86_64                                                                                                                                                           39/47
+  Installing : slurm-openlava-21.08.8-2.el7.x86_64                                                                                                                                                         40/47
+  Installing : slurm-slurmdbd-21.08.8-2.el7.x86_64                                                                                                                                                         41/47
+  Installing : slurm-devel-21.08.8-2.el7.x86_64                                                                                                                                                            42/47
+  Installing : slurm-pam_slurm-21.08.8-2.el7.x86_64                                                                                                                                                        43/47
+  Installing : slurm-slurmd-21.08.8-2.el7.x86_64                                                                                                                                                           44/47
+  Installing : slurm-libpmi-21.08.8-2.el7.x86_64                                                                                                                                                           45/47
+  Installing : slurm-slurmctld-21.08.8-2.el7.x86_64                                                                                                                                                        46/47
+  Installing : slurm-example-configs-21.08.8-2.el7.x86_64                                                                                                                                                  47/47
+  Verifying  : libXext-1.3.3-3.el7.x86_64                                                                                                                                                                   1/47
+  Verifying  : fontconfig-2.13.0-4.3.el7.x86_64                                                                                                                                                             2/47
+  Verifying  : libXrender-0.9.10-1.el7.x86_64                                                                                                                                                               3/47
+  Verifying  : 1:libglvnd-glx-1.0.1-0.8.git5baa1e5.el7.x86_64                                                                                                                                               4/47
+  Verifying  : libXxf86vm-1.1.4-1.el7.x86_64                                                                                                                                                                5/47
+  Verifying  : libwayland-server-1.15.0-1.el7.x86_64                                                                                                                                                        6/47
+  Verifying  : libwayland-client-1.15.0-1.el7.x86_64                                                                                                                                                        7/47
+  Verifying  : fontpackages-filesystem-1.44-8.el7.noarch                                                                                                                                                    8/47
+  Verifying  : slurm-slurmdbd-21.08.8-2.el7.x86_64                                                                                                                                                          9/47
+  Verifying  : slurm-devel-21.08.8-2.el7.x86_64                                                                                                                                                            10/47
+  Verifying  : slurm-21.08.8-2.el7.x86_64                                                                                                                                                                  11/47
+  Verifying  : slurm-contribs-21.08.8-2.el7.x86_64                                                                                                                                                         12/47
+  Verifying  : dejavu-fonts-common-2.33-6.el7.noarch                                                                                                                                                       13/47
+  Verifying  : pango-1.42.4-4.el7_7.x86_64                                                                                                                                                                 14/47
+  Verifying  : fribidi-1.0.2-1.el7_7.1.x86_64                                                                                                                                                              15/47
+  Verifying  : libthai-0.1.14-9.el7.x86_64                                                                                                                                                                 16/47
+  Verifying  : 1:libglvnd-1.0.1-0.8.git5baa1e5.el7.x86_64                                                                                                                                                  17/47
+  Verifying  : libxcb-1.13-1.el7.x86_64                                                                                                                                                                    18/47
+  Verifying  : libXft-2.3.2-2.el7.x86_64                                                                                                                                                                   19/47
+  Verifying  : mesa-libGL-18.3.4-12.el7_9.x86_64                                                                                                                                                           20/47
+  Verifying  : slurm-torque-21.08.8-2.el7.x86_64                                                                                                                                                           21/47
+  Verifying  : harfbuzz-1.7.5-2.el7.x86_64                                                                                                                                                                 22/47
+  Verifying  : mesa-libglapi-18.3.4-12.el7_9.x86_64                                                                                                                                                        23/47
+  Verifying  : dejavu-sans-fonts-2.33-6.el7.noarch                                                                                                                                                         24/47
+  Verifying  : rrdtool-1.4.8-9.el7.x86_64                                                                                                                                                                  25/47
+  Verifying  : pixman-0.34.0-1.el7.x86_64                                                                                                                                                                  26/47
+  Verifying  : slurm-pam_slurm-21.08.8-2.el7.x86_64                                                                                                                                                        27/47
+  Verifying  : cairo-1.15.12-4.el7.x86_64                                                                                                                                                                  28/47
+  Verifying  : slurm-perlapi-21.08.8-2.el7.x86_64                                                                                                                                                          29/47
+  Verifying  : libxshmfence-1.2-1.el7.x86_64                                                                                                                                                               30/47
+  Verifying  : dejavu-sans-mono-fonts-2.33-6.el7.noarch                                                                                                                                                    31/47
+  Verifying  : mesa-libgbm-18.3.4-12.el7_9.x86_64                                                                                                                                                          32/47
+  Verifying  : slurm-example-configs-21.08.8-2.el7.x86_64                                                                                                                                                  33/47
+  Verifying  : slurm-slurmd-21.08.8-2.el7.x86_64                                                                                                                                                           34/47
+  Verifying  : libXau-1.0.8-2.1.el7.x86_64                                                                                                                                                                 35/47
+  Verifying  : 1:libglvnd-egl-1.0.1-0.8.git5baa1e5.el7.x86_64                                                                                                                                              36/47
+  Verifying  : perl-Switch-2.16-7.el7.noarch                                                                                                                                                               37/47
+  Verifying  : libX11-1.6.7-4.el7_9.x86_64                                                                                                                                                                 38/47
+  Verifying  : graphite2-1.3.10-1.el7_3.x86_64                                                                                                                                                             39/47
+  Verifying  : mesa-libEGL-18.3.4-12.el7_9.x86_64                                                                                                                                                          40/47
+  Verifying  : hwloc-libs-1.11.8-4.el7.x86_64                                                                                                                                                              41/47
+  Verifying  : libXdamage-1.1.4-4.1.el7.x86_64                                                                                                                                                             42/47
+  Verifying  : libXfixes-5.0.3-1.el7.x86_64                                                                                                                                                                43/47
+  Verifying  : slurm-libpmi-21.08.8-2.el7.x86_64                                                                                                                                                           44/47
+  Verifying  : libX11-common-1.6.7-4.el7_9.noarch                                                                                                                                                          45/47
+  Verifying  : slurm-openlava-21.08.8-2.el7.x86_64                                                                                                                                                         46/47
+  Verifying  : slurm-slurmctld-21.08.8-2.el7.x86_64                                                                                                                                                        47/47
+
+Installed:
+  slurm.x86_64 0:21.08.8-2.el7            slurm-contribs.x86_64 0:21.08.8-2.el7    slurm-devel.x86_64 0:21.08.8-2.el7     slurm-example-configs.x86_64 0:21.08.8-2.el7   slurm-libpmi.x86_64 0:21.08.8-2.el7
+  slurm-openlava.x86_64 0:21.08.8-2.el7   slurm-pam_slurm.x86_64 0:21.08.8-2.el7   slurm-perlapi.x86_64 0:21.08.8-2.el7   slurm-slurmctld.x86_64 0:21.08.8-2.el7         slurm-slurmd.x86_64 0:21.08.8-2.el7
+  slurm-slurmdbd.x86_64 0:21.08.8-2.el7   slurm-torque.x86_64 0:21.08.8-2.el7
+
+Dependency Installed:
+  cairo.x86_64 0:1.15.12-4.el7                           dejavu-fonts-common.noarch 0:2.33-6.el7                dejavu-sans-fonts.noarch 0:2.33-6.el7          dejavu-sans-mono-fonts.noarch 0:2.33-6.el7
+  fontconfig.x86_64 0:2.13.0-4.3.el7                     fontpackages-filesystem.noarch 0:1.44-8.el7            fribidi.x86_64 0:1.0.2-1.el7_7.1               graphite2.x86_64 0:1.3.10-1.el7_3
+  harfbuzz.x86_64 0:1.7.5-2.el7                          hwloc-libs.x86_64 0:1.11.8-4.el7                       libX11.x86_64 0:1.6.7-4.el7_9                  libX11-common.noarch 0:1.6.7-4.el7_9
+  libXau.x86_64 0:1.0.8-2.1.el7                          libXdamage.x86_64 0:1.1.4-4.1.el7                      libXext.x86_64 0:1.3.3-3.el7                   libXfixes.x86_64 0:5.0.3-1.el7
+  libXft.x86_64 0:2.3.2-2.el7                            libXrender.x86_64 0:0.9.10-1.el7                       libXxf86vm.x86_64 0:1.1.4-1.el7                libglvnd.x86_64 1:1.0.1-0.8.git5baa1e5.el7
+  libglvnd-egl.x86_64 1:1.0.1-0.8.git5baa1e5.el7         libglvnd-glx.x86_64 1:1.0.1-0.8.git5baa1e5.el7         libthai.x86_64 0:0.1.14-9.el7                  libwayland-client.x86_64 0:1.15.0-1.el7
+  libwayland-server.x86_64 0:1.15.0-1.el7                libxcb.x86_64 0:1.13-1.el7                             libxshmfence.x86_64 0:1.2-1.el7                mesa-libEGL.x86_64 0:18.3.4-12.el7_9
+  mesa-libGL.x86_64 0:18.3.4-12.el7_9                    mesa-libgbm.x86_64 0:18.3.4-12.el7_9                   mesa-libglapi.x86_64 0:18.3.4-12.el7_9         pango.x86_64 0:1.42.4-4.el7_7
+  perl-Switch.noarch 0:2.16-7.el7                        pixman.x86_64 0:0.34.0-1.el7                           rrdtool.x86_64 0:1.4.8-9.el7
+
+Complete!
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# mkdir -p /var/spool/slurmd
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# chown slurm: /var/spool/slurmd
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# chmod 755 /var/spool/slurmd
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# touch /var/log/slurmd.log
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# chown slurm: /var/log/slurmd.log
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# slurmd –C
+slurmd: fatal: Unable to determine this slurmd's NodeName
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl status slurmd
+● slurmd.service - Slurm node daemon
+   Loaded: loaded (/usr/lib/systemd/system/slurmd.service; disabled; vendor preset: disabled)
+   Active: inactive (dead)
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl start slurmd
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl status slurmd
+● slurmd.service - Slurm node daemon
+   Loaded: loaded (/usr/lib/systemd/system/slurmd.service; disabled; vendor preset: disabled)
+   Active: active (running) since Thu 2024-02-15 22:54:42 IST; 6s ago
+ Main PID: 23155 (slurmd)
+    Tasks: 1
+   Memory: 548.0K
+   CGroup: /system.slice/slurmd.service
+           └─23155 /usr/sbin/slurmd -D -s
+
+Feb 15 22:54:42 hpc002 systemd[1]: Started Slurm node daemon.
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl status slurmd
+● slurmd.service - Slurm node daemon
+   Loaded: loaded (/usr/lib/systemd/system/slurmd.service; disabled; vendor preset: disabled)
+   Active: active (running) since Thu 2024-02-15 22:54:42 IST; 17s ago
+ Main PID: 23155 (slurmd)
+    Tasks: 1
+   Memory: 632.0K
+   CGroup: /system.slice/slurmd.service
+           └─23155 /usr/sbin/slurmd -D -s
+
+Feb 15 22:54:42 hpc002 systemd[1]: Started Slurm node daemon.
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl restart slurmd
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl status slurmd
+● slurmd.service - Slurm node daemon
+   Loaded: loaded (/usr/lib/systemd/system/slurmd.service; disabled; vendor preset: disabled)
+   Active: active (running) since Thu 2024-02-15 22:57:57 IST; 1s ago
+ Main PID: 23221 (slurmd)
+    Tasks: 1
+   Memory: 588.0K
+   CGroup: /system.slice/slurmd.service
+           └─23221 /usr/sbin/slurmd -D -s
+
+Feb 15 22:57:57 hpc002 systemd[1]: Started Slurm node daemon.
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl status munge
+● munge.service - MUNGE authentication service
+   Loaded: loaded (/usr/lib/systemd/system/munge.service; enabled; vendor preset: disabled)
+   Active: active (running) since Thu 2024-02-15 21:49:03 IST; 1h 12min ago
+     Docs: man:munged(8)
+ Main PID: 22721 (munged)
+    Tasks: 4
+   Memory: 0B
+   CGroup: /system.slice/munge.service
+           └─22721 /usr/sbin/munged
+
+Feb 15 21:48:53 hpc002 systemd[1]: Starting MUNGE authentication service...
+Feb 15 21:49:03 hpc002 systemd[1]: Started MUNGE authentication service.
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# ls /etc/munge/
+munge.key
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl restart munge
+[root@hpc002 slurm-rpms]# systemctl status munge
+● munge.service - MUNGE authentication service
+   Loaded: loaded (/usr/lib/systemd/system/munge.service; enabled; vendor preset: disabled)
+   Active: active (running) since Thu 2024-02-15 23:46:56 IST; 8s ago
+     Docs: man:munged(8)
+  Process: 23435 ExecStart=/usr/sbin/munged (code=exited, status=0/SUCCESS)
+ Main PID: 23437 (munged)
+    Tasks: 4
+   Memory: 596.0K
+   CGroup: /system.slice/munge.service
+           └─23437 /usr/sbin/munged
+
+Feb 15 23:46:46 hpc002 systemd[1]: Starting MUNGE authentication service...
+Feb 15 23:46:56 hpc002 systemd[1]: Started MUNGE authentication service.
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl status slurmd
+● slurmd.service - Slurm node daemon
+   Loaded: loaded (/usr/lib/systemd/system/slurmd.service; disabled; vendor preset: disabled)
+   Active: failed (Result: exit-code) since Thu 2024-02-15 22:58:18 IST; 48min ago
+  Process: 23221 ExecStart=/usr/sbin/slurmd -D -s $SLURMD_OPTIONS (code=exited, status=1/FAILURE)
+ Main PID: 23221 (code=exited, status=1/FAILURE)
+
+Feb 15 22:57:57 hpc002 systemd[1]: Started Slurm node daemon.
+Feb 15 22:58:18 hpc002 slurmd[23221]: slurmd: fatal: Unable to determine this slurmd's NodeName
+Feb 15 22:58:18 hpc002 systemd[1]: slurmd.service: main process exited, code=exited, status=1/FAILURE
+Feb 15 22:58:18 hpc002 systemd[1]: Unit slurmd.service entered failed state.
+Feb 15 22:58:18 hpc002 systemd[1]: slurmd.service failed.
+[root@hpc002 slurm-rpms]# systemctl restart slurmd
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl status slurmd
+● slurmd.service - Slurm node daemon
+   Loaded: loaded (/usr/lib/systemd/system/slurmd.service; disabled; vendor preset: disabled)
+   Active: active (running) since Thu 2024-02-15 23:47:23 IST; 1s ago
+ Main PID: 23449 (slurmd)
+    Tasks: 1
+   Memory: 604.0K
+   CGroup: /system.slice/slurmd.service
+           └─23449 /usr/sbin/slurmd -D -s
+
+Feb 15 23:47:23 hpc002 systemd[1]: Started Slurm node daemon.
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl status slurmd
+● slurmd.service - Slurm node daemon
+   Loaded: loaded (/usr/lib/systemd/system/slurmd.service; disabled; vendor preset: disabled)
+   Active: failed (Result: exit-code) since Thu 2024-02-15 23:47:43 IST; 52s ago
+  Process: 23449 ExecStart=/usr/sbin/slurmd -D -s $SLURMD_OPTIONS (code=exited, status=1/FAILURE)
+ Main PID: 23449 (code=exited, status=1/FAILURE)
+
+Feb 15 23:47:23 hpc002 systemd[1]: Started Slurm node daemon.
+Feb 15 23:47:43 hpc002 slurmd[23449]: slurmd: fatal: Unable to determine this slurmd's NodeName
+Feb 15 23:47:43 hpc002 systemd[1]: slurmd.service: main process exited, code=exited, status=1/FAILURE
+Feb 15 23:47:43 hpc002 systemd[1]: Unit slurmd.service entered failed state.
+Feb 15 23:47:43 hpc002 systemd[1]: slurmd.service failed.
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# vi /var/logl/slurmd.log
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# journalctl -u slurmd
+-- Logs begin at Mon 2024-02-12 21:19:02 IST, end at Thu 2024-02-15 23:50:07 IST. --
+Feb 15 22:54:42 hpc002 systemd[1]: Started Slurm node daemon.
+Feb 15 22:55:02 hpc002 systemd[1]: slurmd.service: main process exited, code=exited, status=1/FAILURE
+Feb 15 22:55:02 hpc002 slurmd[23155]: slurmd: fatal: Unable to determine this slurmd's NodeName
+Feb 15 22:55:02 hpc002 systemd[1]: Unit slurmd.service entered failed state.
+Feb 15 22:55:02 hpc002 systemd[1]: slurmd.service failed.
+Feb 15 22:57:57 hpc002 systemd[1]: Started Slurm node daemon.
+Feb 15 22:58:18 hpc002 slurmd[23221]: slurmd: fatal: Unable to determine this slurmd's NodeName
+Feb 15 22:58:18 hpc002 systemd[1]: slurmd.service: main process exited, code=exited, status=1/FAILURE
+Feb 15 22:58:18 hpc002 systemd[1]: Unit slurmd.service entered failed state.
+Feb 15 22:58:18 hpc002 systemd[1]: slurmd.service failed.
+Feb 15 23:47:23 hpc002 systemd[1]: Started Slurm node daemon.
+Feb 15 23:47:43 hpc002 slurmd[23449]: slurmd: fatal: Unable to determine this slurmd's NodeName
+Feb 15 23:47:43 hpc002 systemd[1]: slurmd.service: main process exited, code=exited, status=1/FAILURE
+Feb 15 23:47:43 hpc002 systemd[1]: Unit slurmd.service entered failed state.
+Feb 15 23:47:43 hpc002 systemd[1]: slurmd.service failed.
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# vim /etc/hosts
+-bash: vim: command not found
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# vi /etc/hosts
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl restart slurmd
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl status slurmd
+● slurmd.service - Slurm node daemon
+   Loaded: loaded (/usr/lib/systemd/system/slurmd.service; disabled; vendor preset: disabled)
+   Active: active (running) since Thu 2024-02-15 23:53:49 IST; 4s ago
+ Main PID: 23522 (slurmd)
+    Tasks: 2
+   Memory: 972.0K
+   CGroup: /system.slice/slurmd.service
+           └─23522 /usr/sbin/slurmd -D -s
+
+Feb 15 23:53:49 hpc002 systemd[1]: Started Slurm node daemon.
+Feb 15 23:53:49 hpc002 slurmd[23522]: slurmd: error: Node configuration differs from hardware: CPUs=1:2(hw) Boards=1:1(hw) SocketsPerBoard=1:2(hw) CoresPerSocket=1:1(hw) ThreadsPerCore=1:1(hw)
+Feb 15 23:53:49 hpc002 slurmd[23522]: slurmd: slurmd version 21.08.8-2 started
+Feb 15 23:53:49 hpc002 slurmd[23522]: slurmd: slurmd started on Thu, 15 Feb 2024 23:53:49 +0530
+Feb 15 23:53:49 hpc002 slurmd[23522]: slurmd: CPUs=1 Boards=1 Sockets=1 Cores=1 Threads=1 Memory=3770 TmpDisk=17906 Uptime=58009 CPUSpecList=(null) FeaturesAvail=(null) FeaturesActive=(null)
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl status slurmd
+● slurmd.service - Slurm node daemon
+   Loaded: loaded (/usr/lib/systemd/system/slurmd.service; disabled; vendor preset: disabled)
+   Active: active (running) since Thu 2024-02-15 23:53:49 IST; 1min 53s ago
+ Main PID: 23522 (slurmd)
+    Tasks: 2
+   Memory: 896.0K
+   CGroup: /system.slice/slurmd.service
+           └─23522 /usr/sbin/slurmd -D -s
+
+Feb 15 23:53:49 hpc002 slurmd[23522]: slurmd: error: Node configuration differs from hardware: CPUs=1:2(hw) Boards=1:1(hw) SocketsPerBoard=1:2(hw) CoresPerSocket=1:1(hw) ThreadsPerCore=1:1(hw)
+Feb 15 23:53:49 hpc002 slurmd[23522]: slurmd: slurmd version 21.08.8-2 started
+Feb 15 23:53:49 hpc002 slurmd[23522]: slurmd: slurmd started on Thu, 15 Feb 2024 23:53:49 +0530
+Feb 15 23:53:49 hpc002 slurmd[23522]: slurmd: CPUs=1 Boards=1 Sockets=1 Cores=1 Threads=1 Memory=3770 TmpDisk=17906 Uptime=58009 CPUSpecList=(null) FeaturesAvail=(null) FeaturesActive=(null)
+Feb 15 23:54:11 hpc002 slurmd[23522]: slurmd: error: Munge decode failed: Expired credential
+Feb 15 23:54:11 hpc002 slurmd[23522]: slurmd: auth/munge: _print_cred: ENCODED: Thu Feb 15 01:31:15 2024
+Feb 15 23:54:11 hpc002 slurmd[23522]: slurmd: auth/munge: _print_cred: DECODED: Thu Feb 15 23:54:11 2024
+Feb 15 23:55:42 hpc002 slurmd[23522]: slurmd: error: Munge decode failed: Expired credential
+Feb 15 23:55:42 hpc002 slurmd[23522]: slurmd: auth/munge: _print_cred: ENCODED: Thu Feb 15 01:32:55 2024
+Feb 15 23:55:42 hpc002 slurmd[23522]: slurmd: auth/munge: _print_cred: DECODED: Thu Feb 15 23:55:42 2024
+[root@hpc002 slurm-rpms]# systemctl restart slurmd
+[root@hpc002 slurm-rpms]# systemctl status slurmd
+● slurmd.service - Slurm node daemon
+   Loaded: loaded (/usr/lib/systemd/system/slurmd.service; disabled; vendor preset: disabled)
+   Active: active (running) since Thu 2024-02-15 23:56:07 IST; 2s ago
+ Main PID: 23537 (slurmd)
+    Tasks: 2
+   Memory: 972.0K
+   CGroup: /system.slice/slurmd.service
+           └─23537 /usr/sbin/slurmd -D -s
+
+Feb 15 23:56:07 hpc002 systemd[1]: Started Slurm node daemon.
+Feb 15 23:56:07 hpc002 slurmd[23537]: slurmd: error: Node configuration differs from hardware: CPUs=1:2(hw) Boards=1:1(hw) SocketsPerBoard=1:2(hw) CoresPerSocket=1:1(hw) ThreadsPerCore=1:1(hw)
+Feb 15 23:56:07 hpc002 slurmd[23537]: slurmd: slurmd version 21.08.8-2 started
+Feb 15 23:56:07 hpc002 slurmd[23537]: slurmd: slurmd started on Thu, 15 Feb 2024 23:56:07 +0530
+Feb 15 23:56:07 hpc002 slurmd[23537]: slurmd: CPUs=1 Boards=1 Sockets=1 Cores=1 Threads=1 Memory=3770 TmpDisk=17906 Uptime=58146 CPUSpecList=(null) FeaturesAvail=(null) FeaturesActive=(null)
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl restart munge
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl status munge
+● munge.service - MUNGE authentication service
+   Loaded: loaded (/usr/lib/systemd/system/munge.service; enabled; vendor preset: disabled)
+   Active: active (running) since Thu 2024-02-15 23:56:39 IST; 5s ago
+     Docs: man:munged(8)
+  Process: 23547 ExecStart=/usr/sbin/munged (code=exited, status=0/SUCCESS)
+ Main PID: 23549 (munged)
+    Tasks: 4
+   Memory: 616.0K
+   CGroup: /system.slice/munge.service
+           └─23549 /usr/sbin/munged
+
+Feb 15 23:56:39 hpc002 systemd[1]: Starting MUNGE authentication service...
+Feb 15 23:56:39 hpc002 systemd[1]: Started MUNGE authentication service.
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# date
+Thu Feb 15 23:58:42 IST 2024
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl status munge
+● munge.service - MUNGE authentication service
+   Loaded: loaded (/usr/lib/systemd/system/munge.service; enabled; vendor preset: disabled)
+   Active: active (running) since Thu 2024-02-15 23:56:39 IST; 2min 8s ago
+     Docs: man:munged(8)
+  Process: 23547 ExecStart=/usr/sbin/munged (code=exited, status=0/SUCCESS)
+ Main PID: 23549 (munged)
+    Tasks: 4
+   Memory: 520.0K
+   CGroup: /system.slice/munge.service
+           └─23549 /usr/sbin/munged
+
+Feb 15 23:56:39 hpc002 systemd[1]: Starting MUNGE authentication service...
+Feb 15 23:56:39 hpc002 systemd[1]: Started MUNGE authentication service.
+[root@hpc002 slurm-rpms]# systemctl status slurmd
+● slurmd.service - Slurm node daemon
+   Loaded: loaded (/usr/lib/systemd/system/slurmd.service; disabled; vendor preset: disabled)
+   Active: active (running) since Thu 2024-02-15 23:56:07 IST; 2min 43s ago
+ Main PID: 23537 (slurmd)
+    Tasks: 2
+   Memory: 904.0K
+   CGroup: /system.slice/slurmd.service
+           └─23537 /usr/sbin/slurmd -D -s
+
+Feb 15 23:56:07 hpc002 slurmd[23537]: slurmd: error: Node configuration differs from hardware: CPUs=1:2(hw) Boards=1:1(hw) SocketsPerBoard=1:2(hw) CoresPerSocket=1:1(hw) ThreadsPerCore=1:1(hw)
+Feb 15 23:56:07 hpc002 slurmd[23537]: slurmd: slurmd version 21.08.8-2 started
+Feb 15 23:56:07 hpc002 slurmd[23537]: slurmd: slurmd started on Thu, 15 Feb 2024 23:56:07 +0530
+Feb 15 23:56:07 hpc002 slurmd[23537]: slurmd: CPUs=1 Boards=1 Sockets=1 Cores=1 Threads=1 Memory=3770 TmpDisk=17906 Uptime=58146 CPUSpecList=(null) FeaturesAvail=(null) FeaturesActive=(null)
+Feb 15 23:57:13 hpc002 slurmd[23537]: slurmd: error: Munge decode failed: Expired credential
+Feb 15 23:57:13 hpc002 slurmd[23537]: slurmd: auth/munge: _print_cred: ENCODED: Thu Feb 15 01:34:35 2024
+Feb 15 23:57:13 hpc002 slurmd[23537]: slurmd: auth/munge: _print_cred: DECODED: Thu Feb 15 23:57:13 2024
+Feb 15 23:57:56 hpc002 slurmd[23537]: slurmd: error: Munge decode failed: Expired credential
+Feb 15 23:57:56 hpc002 slurmd[23537]: slurmd: auth/munge: _print_cred: ENCODED: Thu Feb 15 01:35:21 2024
+Feb 15 23:57:56 hpc002 slurmd[23537]: slurmd: auth/munge: _print_cred: DECODED: Thu Feb 15 23:57:56 2024
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl start ntpd
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# systemctl status ntpd
+● ntpd.service - Network Time Service
+   Loaded: loaded (/usr/lib/systemd/system/ntpd.service; disabled; vendor preset: disabled)
+   Active: active (running) since Thu 2024-02-15 23:59:52 IST; 22h left
+  Process: 23570 ExecStart=/usr/sbin/ntpd -u ntp:ntp $OPTIONS (code=exited, status=0/SUCCESS)
+ Main PID: 23571 (ntpd)
+    Tasks: 1
+   Memory: 1.2M
+   CGroup: /system.slice/ntpd.service
+           └─23571 /usr/sbin/ntpd -u ntp:ntp -g
+
+Feb 15 23:59:52 hpc002 ntpd[23571]: Listen normally on 5 lo ::1 UDP 123
+Feb 15 23:59:52 hpc002 ntpd[23571]: Listen normally on 6 ens33 fe80::250:56ff:fe2c:cdbc UDP 123
+Feb 15 23:59:52 hpc002 ntpd[23571]: Listen normally on 7 ens36 fe80::20c:29ff:fe9c:a4c9 UDP 123
+Feb 15 23:59:52 hpc002 ntpd[23571]: Listening on routing socket on fd #24 for interface updates
+Feb 15 23:59:52 hpc002 ntpd[23571]: 0.0.0.0 c016 06 restart
+Feb 15 23:59:52 hpc002 ntpd[23571]: 0.0.0.0 c012 02 freq_set kernel 0.000 PPM
+Feb 15 23:59:52 hpc002 ntpd[23571]: 0.0.0.0 c011 01 freq_not_set
+Feb 15 23:59:59 hpc002 ntpd[23571]: 0.0.0.0 c61c 0c clock_step -80544.064722 s
+Feb 15 01:37:35 hpc002 ntpd[23571]: 0.0.0.0 c614 04 freq_mode
+Feb 15 01:37:36 hpc002 ntpd[23571]: 0.0.0.0 c618 08 no_sys_peer
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# https://github.com/Sandip1717/HPC_Project.git^C
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# yum install ntp -y
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: bd.mirror.vanehost.com
+ * epel: mirror2.totbb.net
+ * extras: centos.excellmedia.net
+ * updates: centos.excellmedia.net
+Package ntp-4.2.6p5-29.el7.centos.2.x86_64 already installed and latest version
+Nothing to do
+[root@hpc002 slurm-rpms]# ckage ntp-4.2.6p5-29.el7.centos.2.x86_64 already installed and latest version^C
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# ckage ntp-4.2.6p5-29.el7.centos.2.x86_64 already installed and latest versionckage ntp-4.2.6p5-29.el7.centos.2.x86_64 already installed and latest version^C
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# timedatectl set-timezone "Asia/Kolkata"
+[root@hpc002 slurm-rpms]#
+
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# date
+Thu Feb 15 01:55:14 IST 2024
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# date
+Thu Feb 15 01:56:24 IST 2024
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# python3
+-bash: python3: command not found
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# yum install pip-python3
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: bd.mirror.vanehost.com
+ * epel: mirror2.totbb.net
+ * extras: centos.excellmedia.net
+ * updates: centos.excellmedia.net
+No package pip-python3 available.
+Error: Nothing to do
+[root@hpc002 slurm-rpms]# yum install -y python3
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: bd.mirror.vanehost.com
+ * epel: mirror2.totbb.net
+ * extras: centos.excellmedia.net
+ * updates: centos.excellmedia.net
+Resolving Dependencies
+--> Running transaction check
+---> Package python3.x86_64 0:3.6.8-21.el7_9 will be installed
+--> Processing Dependency: python3-libs(x86-64) = 3.6.8-21.el7_9 for package: python3-3.6.8-21.el7_9.x86_64
+--> Processing Dependency: python3-setuptools for package: python3-3.6.8-21.el7_9.x86_64
+--> Processing Dependency: python3-pip for package: python3-3.6.8-21.el7_9.x86_64
+--> Processing Dependency: libpython3.6m.so.1.0()(64bit) for package: python3-3.6.8-21.el7_9.x86_64
+--> Running transaction check
+---> Package python3-libs.x86_64 0:3.6.8-21.el7_9 will be installed
+---> Package python3-pip.noarch 0:9.0.3-8.el7 will be installed
+---> Package python3-setuptools.noarch 0:39.2.0-10.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=================================================================================================================================================================================================================
+ Package                                                  Arch                                         Version                                               Repository                                     Size
+=================================================================================================================================================================================================================
+Installing:
+ python3                                                  x86_64                                       3.6.8-21.el7_9                                        updates                                        71 k
+Installing for dependencies:
+ python3-libs                                             x86_64                                       3.6.8-21.el7_9                                        updates                                       7.0 M
+ python3-pip                                              noarch                                       9.0.3-8.el7                                           base                                          1.6 M
+ python3-setuptools                                       noarch                                       39.2.0-10.el7                                         base                                          629 k
+
+Transaction Summary
+=================================================================================================================================================================================================================
+Install  1 Package (+3 Dependent packages)
+
+Total download size: 9.3 M
+Installed size: 47 M
+Downloading packages:
+python3-libs-3.6.8-21.el7_9.x8 FAILED
+http://centos.mirror.net.in/centos/7.9.2009/updates/x86_64/Packages/python3-libs-3.6.8-21.el7_9.x86_64.rpm: [Errno 14] curl#7 - "Failed to connect to 2001:df5:fc00:fffb::3: Network is unreachable"--:--:-- ETA
+Trying other mirror.
+python3-setuptools-39.2.0-10.e FAILED
+http://centos.mirror.net.in/centos/7.9.2009/os/x86_64/Packages/python3-setuptools-39.2.0-10.el7.noarch.rpm: [Errno 14] curl#7 - "Failed to connect to 2001:df5:fc00:fffb::3: Network is unreachable"--:--:-- ETA
+Trying other mirror.
+^C
+
+Exiting on user cancel
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# ping 8.8.8.8
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+^C
+--- 8.8.8.8 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1001ms
+
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# dhclient -v
+dhclient(22419) is already running - exiting.
+
+This version of ISC DHCP is based on the release available
+on ftp.isc.org.  Features have been added and other changes
+have been made to the base software release in order to make
+it work better with this distribution.
+
+Please report for this software via the CentOS Bugs Database:
+    http://bugs.centos.org/
+
+exiting.
+[root@hpc002 slurm-rpms]# dhclient -r
+client_loop: send disconnect: Connection reset
+PS C:\Users\rajesh> ssh root@192.168.144.211
+root@192.168.144.211's password:
+Last login: Thu Feb 15 21:33:35 2024 from 192.168.144.1
+[root@hpc002 ~]#
+[root@hpc002 ~]#
+[root@hpc002 ~]#
+[root@hpc002 ~]# yum install -y python3
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirrors.nxtgen.com
+ * epel: repo.extreme-ix.org
+ * extras: mirrors.nxtgen.com
+ * updates: mirrors.nxtgen.com
+Resolving Dependencies
+--> Running transaction check
+---> Package python3.x86_64 0:3.6.8-21.el7_9 will be installed
+--> Processing Dependency: python3-libs(x86-64) = 3.6.8-21.el7_9 for package: python3-3.6.8-21.el7_9.x86_64
+--> Processing Dependency: python3-setuptools for package: python3-3.6.8-21.el7_9.x86_64
+--> Processing Dependency: python3-pip for package: python3-3.6.8-21.el7_9.x86_64
+--> Processing Dependency: libpython3.6m.so.1.0()(64bit) for package: python3-3.6.8-21.el7_9.x86_64
+--> Running transaction check
+---> Package python3-libs.x86_64 0:3.6.8-21.el7_9 will be installed
+---> Package python3-pip.noarch 0:9.0.3-8.el7 will be installed
+---> Package python3-setuptools.noarch 0:39.2.0-10.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=================================================================================================================================================================================================================
+ Package                                                  Arch                                         Version                                               Repository                                     Size
+=================================================================================================================================================================================================================
+Installing:
+ python3                                                  x86_64                                       3.6.8-21.el7_9                                        updates                                        71 k
+Installing for dependencies:
+ python3-libs                                             x86_64                                       3.6.8-21.el7_9                                        updates                                       7.0 M
+ python3-pip                                              noarch                                       9.0.3-8.el7                                           base                                          1.6 M
+ python3-setuptools                                       noarch                                       39.2.0-10.el7                                         base                                          629 k
+
+Transaction Summary
+=================================================================================================================================================================================================================
+Install  1 Package (+3 Dependent packages)
+
+Total download size: 9.3 M
+Installed size: 47 M
+Downloading packages:
+Delta RPMs disabled because /usr/bin/applydeltarpm not installed.
+(1/4): python3-3.6.8-21.el7_9.x86_64.rpm                                                                                                                                                  |  71 kB  00:00:00
+(2/4): python3-setuptools-39.2.0-10.el7.noarch.rpm                                                                                                                                        | 629 kB  00:00:01
+(3/4): python3-pip-9.0.3-8.el7.noarch.rpm                                                                                                                                                 | 1.6 MB  00:00:01
+(4/4): python3-libs-3.6.8-21.el7_9.x86_64.rpm                                                                                                                                             | 7.0 MB  00:00:04
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                                                            2.3 MB/s | 9.3 MB  00:00:04
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : python3-setuptools-39.2.0-10.el7.noarch                                                                                                                                                       1/4
+  Installing : python3-pip-9.0.3-8.el7.noarch                                                                                                                                                                2/4
+  Installing : python3-3.6.8-21.el7_9.x86_64                                                                                                                                                                 3/4
+  Installing : python3-libs-3.6.8-21.el7_9.x86_64                                                                                                                                                            4/4
+  Verifying  : python3-libs-3.6.8-21.el7_9.x86_64                                                                                                                                                            1/4
+  Verifying  : python3-3.6.8-21.el7_9.x86_64                                                                                                                                                                 2/4
+  Verifying  : python3-setuptools-39.2.0-10.el7.noarch                                                                                                                                                       3/4
+  Verifying  : python3-pip-9.0.3-8.el7.noarch                                                                                                                                                                4/4
+
+Installed:
+  python3.x86_64 0:3.6.8-21.el7_9
+
+Dependency Installed:
+  python3-libs.x86_64 0:3.6.8-21.el7_9                                 python3-pip.noarch 0:9.0.3-8.el7                                 python3-setuptools.noarch 0:39.2.0-10.el7
+
+Complete!
+[root@hpc002 ~]# cat job.13.err
+cat: job.13.err: No such file or directory
+[root@hpc002 ~]#
+[root@hpc002 ~]#
+[root@hpc002 ~]#
+[root@hpc002 ~]# cd /nfs/slurm-rpms/
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# ls
+1.sh        job.1.err  myscript1.sh                    slurm-contribs-21.08.8-2.el7.x86_64.rpm         slurm-openlava-21.08.8-2.el7.x86_64.rpm   slurm-slurmd-21.08.8-2.el7.x86_64.rpm
+job.11.err  job.1.out  myscript.sh                     slurm-devel-21.08.8-2.el7.x86_64.rpm            slurm-pam_slurm-21.08.8-2.el7.x86_64.rpm  slurm-slurmdbd-21.08.8-2.el7.x86_64.rpm
+job.12.err  job.2.err  py1.py                          slurm-example-configs-21.08.8-2.el7.x86_64.rpm  slurm-perlapi-21.08.8-2.el7.x86_64.rpm    slurm-torque-21.08.8-2.el7.x86_64.rpm
+job.13.err  job.4.err  slurm-21.08.8-2.el7.x86_64.rpm  slurm-libpmi-21.08.8-2.el7.x86_64.rpm           slurm-slurmctld-21.08.8-2.el7.x86_64.rpm
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# cat job.13.err
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]# cat 1.sh
+hello
+THIS IS SANDIP
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#
+[root@hpc002 slurm-rpms]#

@@ -1,0 +1,23 @@
+
+
+HPC Master
+	>>Docker swarm , nagios  
+	>>SSH >> comp1,comp2
+       
+Jenkins
+------>> Jenkins as a service 
+	>> SSH 
+
+compute nodes,,,
+
+docker package
+nagios packages
+
+ERROR .>>> OS not found at compute node ..
+           then 
+		>> makehosts
+	        >> makenetworks 
+		>> makedns -n  | -a 
+		>> makedhcp -n | -a
+
+

@@ -1,0 +1,27 @@
+JENKINS PIPELINE SCRIPT >>>>>
+
+pipeline{
+    agent any
+    
+    stages{
+        
+        stage('fetch-code'){
+            steps{
+                sh '''
+                ssh root@192.168.144.213 'cd /nfs/slurm-rpms/HPC-SLURM/ && git pull' 
+                '''
+            }
+        }
+        
+        stage('Run-code'){
+            steps{
+                sh '''
+                
+                
+                ssh root@192.168.144.213 'pip3 install virtualenv && cd /nfs/slurm-rpms/ && virtualenv venv && source venv/bin/activate && pip3 install numpy pandas sklearn && sbatch myscript1.sh'
+                '''
+            }
+        }
+    }
+}
+

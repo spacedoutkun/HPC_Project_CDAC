@@ -1,0 +1,509 @@
+PowerShell 7.3.11
+
+   A new PowerShell stable release is available: v7.4.1
+   Upgrade now, or check out the release page at:
+     https://aka.ms/PowerShell-Release?tag=v7.4.1
+
+PS C:\Users\rajesh> ssh root@192.168.144.207
+ssh: connect to host 192.168.144.207 port 22: Connection timed out
+PS C:\Users\rajesh> ssh root@192.168.144.207
+root@192.168.144.207's password:
+Last login: Tue Feb 13 19:47:42 2024 from 192.168.144.1
+[root@production ~]#
+[root@production ~]#
+[root@production ~]#
+[root@production ~]# client_loop: send disconnect: Connection reset
+PS C:\Users\rajesh> ^C
+PS C:\Users\rajesh>
+PS C:\Users\rajesh> ssh root@192.168.144.206
+root@192.168.144.206's password:
+Last login: Wed Feb 14 13:20:29 2024 from 192.168.144.1
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# vim /etc/s
+sasl2/                  shadow-                 statetab.d/             sysconfig/
+securetty               shells                  subgid                  sysctl.conf
+security/               skel/                   subuid                  sysctl.conf.xcatbackup
+selinux/                snmp/                   sudo.conf               sysctl.d/
+services                ssh/                    sudoers                 systemd/
+sestatus.conf           ssl/                    sudoers.d/              system-release
+shadow                  statetab                sudo-ldap.conf          system-release-cpe
+[root@master ~]# vim /etc/ssh/ssh
+ssh_config                ssh_host_ecdsa_key.pub    ssh_host_rsa_key
+sshd_config               ssh_host_ed25519_key      ssh_host_rsa_key.pub
+ssh_host_ecdsa_key        ssh_host_ed25519_key.pub
+[root@master ~]# vim /etc/ssh/sshd_config
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# vi /etc/ansible/hosts
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# lsblk
+NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda               8:0    0   50G  0 disk
+├─sda1            8:1    0    1G  0 part /boot
+└─sda2            8:2    0   49G  0 part
+  ├─centos-root 253:0    0   44G  0 lvm  /
+  └─centos-swap 253:1    0    5G  0 lvm  [SWAP]
+sr0              11:0    1 1024M  0 rom
+[root@master ~]# Connection to 192.168.144.206 closed by remote host.
+Connection to 192.168.144.206 closed.
+PS C:\Users\rajesh> ssh root@192.168.144.206
+root@192.168.144.206's password:
+Last login: Wed Feb 14 14:03:09 2024 from master.demo.lab
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# cd ansible-practice
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]# ls
+[root@master ansible-practice]# vi playbook-nfs.yml
+[root@master ansible-practice]# [root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]# vi playbook-nfs.yml
+[root@master ansible-practice]# [root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]# ansible-playbook -i inventory playbook-nfs.yml
+[WARNING]: Unable to parse /root/ansible-practice/inventory as an inventory source
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit
+localhost does not match 'all'
+ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: No JSON object could be decoded
+
+Syntax Error while loading YAML.
+  mapping values are not allowed in this context
+
+The error appears to be in '/root/ansible-practice/playbook-nfs.yml': line 2, column 9, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+hosts: HpcMaster
+  become: true
+        ^ here
+[root@master ansible-practice]# vi playbook-nfs.yml
+[root@master ansible-practice]# [root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]# ansible-playbook -i inventory playbook-nfs.yml
+[WARNING]: Unable to parse /root/ansible-practice/inventory as an inventory source
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit
+localhost does not match 'all'
+ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: No JSON object could be decoded
+
+Syntax Error while loading YAML.
+  did not find expected <document start>
+
+The error appears to be in '/root/ansible-practice/playbook-nfs.yml': line 87, column 1, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+
+- hosts: compute
+^ here
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]# vi playbook-nfs.yml
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]# ansible-playbook -i inventory playbook-nfs.yml
+[WARNING]: Unable to parse /root/ansible-practice/inventory as an inventory source
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit
+localhost does not match 'all'
+ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: No JSON object could be decoded
+
+Syntax Error while loading YAML.
+  did not find expected key
+
+The error appears to be in '/root/ansible-practice/playbook-nfs.yml': line 5, column 3, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+    Network_to_allow: 192.168.2.0/24
+  tasks:
+  ^ here
+[root@master ansible-practice]# vi playbook-nfs.yml
+[root@master ansible-practice]# [root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]# ansible-playbook -i inventory playbook-nfs.yml
+[WARNING]: Unable to parse /root/ansible-practice/inventory as an inventory source
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit
+localhost does not match 'all'
+ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: No JSON object could be decoded
+
+Syntax Error while loading YAML.
+  did not find expected key
+
+The error appears to be in '/root/ansible-practice/playbook-nfs.yml': line 77, column 3, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+        - restart nfs
+  handlers:
+  ^ here
+[root@master ansible-practice]# vi playbook-nfs.yml
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]# ansible-playbook -i inventory playbook-nfs.yml
+[WARNING]: Unable to parse /root/ansible-practice/inventory as an inventory source
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit
+localhost does not match 'all'
+[WARNING]: While constructing a mapping from /root/ansible-practice/playbook-nfs.yml, line 1, column
+1, found a duplicate dict key (hosts). Using last defined value only.
+[WARNING]: While constructing a mapping from /root/ansible-practice/playbook-nfs.yml, line 1, column
+1, found a duplicate dict key (become). Using last defined value only.
+[WARNING]: While constructing a mapping from /root/ansible-practice/playbook-nfs.yml, line 1, column
+1, found a duplicate dict key (vars). Using last defined value only.
+[WARNING]: While constructing a mapping from /root/ansible-practice/playbook-nfs.yml, line 1, column
+1, found a duplicate dict key (tasks). Using last defined value only.
+ERROR! A playbook must be a list of plays, got a <class 'ansible.parsing.yaml.objects.AnsibleMapping'> instead
+
+The error appears to be in '/root/ansible-practice/playbook-nfs.yml': line 1, column 1, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+
+hosts: HpcMaster
+^ here
+[root@master ansible-practice]# vi playbook-nfs.yml
+[root@master ansible-practice]# [root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]# ansible-playbook -i inventory playbook-nfs.yml
+[WARNING]: Unable to parse /root/ansible-practice/inventory as an inventory source
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit
+localhost does not match 'all'
+[WARNING]: While constructing a mapping from /root/ansible-practice/playbook-nfs.yml, line 1, column
+1, found a duplicate dict key (become). Using last defined value only.
+[WARNING]: While constructing a mapping from /root/ansible-practice/playbook-nfs.yml, line 1, column
+1, found a duplicate dict key (vars). Using last defined value only.
+[WARNING]: While constructing a mapping from /root/ansible-practice/playbook-nfs.yml, line 1, column
+1, found a duplicate dict key (tasks). Using last defined value only.
+ERROR! A playbook must be a list of plays, got a <class 'ansible.parsing.yaml.objects.AnsibleMapping'> instead
+
+The error appears to be in '/root/ansible-practice/playbook-nfs.yml': line 1, column 1, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+
+-hosts: HpcMaster
+^ here
+[root@master ansible-practice]# vi playbook-nfs.yml
+[root@master ansible-practice]# [root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]# ansible-playbook -i inventory playbook-nfs.yml
+[WARNING]: Unable to parse /root/ansible-practice/inventory as an inventory source
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit
+localhost does not match 'all'
+ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: No JSON object could be decoded
+
+Syntax Error while loading YAML.
+  did not find expected '-' indicator
+
+The error appears to be in '/root/ansible-practice/playbook-nfs.yml': line 2, column 1, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+- hosts: HpcMaster
+become: true
+^ here
+[root@master ansible-practice]#
+[root@master ansible-practice]# vi playbook-nfs.yml
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]# ansible-playbook -i inventory playbook-nfs.yml
+[WARNING]: Unable to parse /root/ansible-practice/inventory as an inventory source
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit
+localhost does not match 'all'
+[WARNING]: Could not match supplied host pattern, ignoring: HpcMaster
+
+PLAY [HpcMaster] *************************************************************************************skipping: no hosts matched
+[WARNING]: Could not match supplied host pattern, ignoring: compute
+
+PLAY [compute] ***************************************************************************************skipping: no hosts matched
+
+PLAY RECAP *******************************************************************************************
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]# ls
+playbook-nfs.yml
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]# ls
+playbook-nfs.yml
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]# cd ..
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# l
+-bash: l: command not found
+[root@master ~]# ls
+anaconda-ks.cfg   CentOS-7-x86_64-DVD-2009.iso      script1.sh
+ansible           CentOS-7-x86_64-Minimal-2009.iso  script2.sh
+ansible-practice  python1.py                        script3.sh
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# cd an
+anaconda-ks.cfg   ansible/          ansible-practice/
+[root@master ~]# cd ansible
+[root@master ansible]# ls
+inventory
+[root@master ansible]#
+[root@master ansible]#
+[root@master ansible]# ls -all
+total 8
+drwxr-xr-x  2 root root   23 Feb 14 14:03 .
+dr-xr-x---. 8 root root 4096 Feb 14 14:03 ..
+-rw-r--r--  1 root root  242 Feb 14 14:03 inventory
+[root@master ansible]#
+[root@master ansible]#
+[root@master ansible]#
+[root@master ansible]# ls
+inventory
+[root@master ansible]#
+[root@master ansible]#
+[root@master ansible]# cp inventory /root/ansible-practice/
+[root@master ansible]#
+[root@master ansible]#
+[root@master ansible]# cd
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# cd ansible-practice/
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]# ls
+inventory  playbook-nfs.yml
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]# ansible-playbook -i inventory playbook-nfs.yml
+
+PLAY [HpcMaster] *************************************************************************************
+TASK [Gathering Facts] *******************************************************************************ok: [hpcMaster]
+
+TASK [Update apt cache and make sure nfs-kernel is installed] ****************************************ok: [hpcMaster]
+
+TASK [Install required packages] *********************************************************************ok: [hpcMaster]
+
+TASK [Check for /dev/sdb1 partition] *****************************************************************ok: [hpcMaster]
+
+TASK [Create partition on /dev/sdb] ******************************************************************changed: [hpcMaster]
+
+TASK [Wait for /dev/sdb1 to appear] ******************************************************************ok: [hpcMaster]
+
+TASK [Format /dev/sdb1 with ext4] ********************************************************************changed: [hpcMaster]
+
+TASK [Create mount point] ****************************************************************************
+changed: [hpcMaster]
+
+TASK [Mount /dev/sdb1] *******************************************************************************
+changed: [hpcMaster]
+
+TASK [Ensure filesystem mounts on boot] **************************************************************
+changed: [hpcMaster]
+
+TASK [Install NFS server packages] *******************************************************************
+ok: [hpcMaster]
+
+TASK [Create NFS directory] **************************************************************************
+changed: [hpcMaster]
+
+TASK [Setup /etc/exports] ****************************************************************************
+changed: [hpcMaster]
+
+TASK [Export the NFS directories and restart NFS] ****************************************************
+changed: [hpcMaster]
+
+RUNNING HANDLER [restart nfs] ************************************************************************
+changed: [hpcMaster]
+
+PLAY [compute] ***************************************************************************************
+
+TASK [Gathering Facts] *******************************************************************************
+ok: [host1]
+ok: [host2]
+ok: [host3]
+
+TASK [Update apt cache and make sure nfs-common is installed] ****************************************
+ok: [host3]
+ok: [host2]
+fatal: [host1]: FAILED! => {"changed": false, "msg": "Failure talking to yum: Cannot find a valid baseurl for repo: base/7/x86_64"}
+
+TASK [Start and enable rpcbind service] **************************************************************
+ok: [host3]
+ok: [host2]
+
+TASK [Start and enable nfs-client.target] ************************************************************
+ok: [host2]
+ok: [host3]
+
+TASK [Create local NFS mount directory] **************************************************************
+changed: [host3]
+changed: [host2]
+
+TASK [Mount NFS directory] ***************************************************************************
+changed: [host3]
+changed: [host2]
+
+TASK [Ensure NFS mounts on boot] *********************************************************************
+changed: [host3]
+changed: [host2]
+
+TASK [Create group 'rma'] ****************************************************************************
+changed: [host3]
+changed: [host2]
+
+TASK [Create user 'hpc'] *****************************************************************************
+changed: [host2]
+changed: [host3]
+
+PLAY RECAP *******************************************************************************************
+host1                      : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0
+host2                      : ok=9    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+host3                      : ok=9    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+hpcMaster                  : ok=15   changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]# ansible-playbook -i inventory playbook-nfs.yml
+
+PLAY [HpcMaster] ************************************************************************************************************************************************************************************************
+TASK [Gathering Facts] ******************************************************************************************************************************************************************************************
+ok: [hpcMaster]
+
+TASK [Update apt cache and make sure nfs-kernel is installed] ***************************************************************************************************************************************************
+ok: [hpcMaster]
+
+TASK [Install required packages] ********************************************************************************************************************************************************************************
+ok: [hpcMaster]
+
+TASK [Check for /dev/sdb1 partition] ****************************************************************************************************************************************************************************
+ok: [hpcMaster]
+
+TASK [Create partition on /dev/sdb] *****************************************************************************************************************************************************************************
+skipping: [hpcMaster]
+
+TASK [Wait for /dev/sdb1 to appear] *****************************************************************************************************************************************************************************
+ok: [hpcMaster]
+
+TASK [Format /dev/sdb1 with ext4] *******************************************************************************************************************************************************************************
+ok: [hpcMaster]
+
+TASK [Create mount point] ***************************************************************************************************************************************************************************************
+ok: [hpcMaster]
+
+TASK [Mount /dev/sdb1] ******************************************************************************************************************************************************************************************
+ok: [hpcMaster]
+
+TASK [Ensure filesystem mounts on boot] *************************************************************************************************************************************************************************
+ok: [hpcMaster]
+
+TASK [Install NFS server packages] ******************************************************************************************************************************************************************************
+ok: [hpcMaster]
+
+TASK [Create NFS directory] *************************************************************************************************************************************************************************************
+ok: [hpcMaster]
+
+TASK [Setup /etc/exports] ***************************************************************************************************************************************************************************************
+ok: [hpcMaster]
+
+TASK [Export the NFS directories and restart NFS] ***************************************************************************************************************************************************************
+changed: [hpcMaster]
+
+RUNNING HANDLER [restart nfs] ***********************************************************************************************************************************************************************************
+changed: [hpcMaster]
+
+PLAY [compute] **************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************************************************************************************************************
+ok: [host1]
+ok: [host2]
+ok: [host3]
+
+TASK [Update apt cache and make sure nfs-common is installed] ***************************************************************************************************************************************************
+ok: [host3]
+ok: [host2]
+fatal: [host1]: FAILED! => {"changed": false, "msg": "Failure talking to yum: Cannot find a valid baseurl for repo: base/7/x86_64"}
+
+TASK [Start and enable rpcbind service] *************************************************************************************************************************************************************************
+ok: [host3]
+ok: [host2]
+
+TASK [Start and enable nfs-client.target] ***********************************************************************************************************************************************************************
+ok: [host3]
+ok: [host2]
+
+TASK [Create local NFS mount directory] *************************************************************************************************************************************************************************
+ok: [host3]
+ok: [host2]
+
+TASK [Mount NFS directory] **************************************************************************************************************************************************************************************
+ok: [host3]
+ok: [host2]
+
+TASK [Ensure NFS mounts on boot] ********************************************************************************************************************************************************************************
+ok: [host3]
+ok: [host2]
+
+TASK [Create group 'rma'] ***************************************************************************************************************************************************************************************
+ok: [host3]
+ok: [host2]
+
+TASK [Create user 'hpc'] ****************************************************************************************************************************************************************************************
+ok: [host3]
+ok: [host2]
+
+PLAY RECAP ******************************************************************************************************************************************************************************************************
+host1                      : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0
+host2                      : ok=9    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+host3                      : ok=9    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+hpcMaster                  : ok=14   changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#
+[root@master ansible-practice]#

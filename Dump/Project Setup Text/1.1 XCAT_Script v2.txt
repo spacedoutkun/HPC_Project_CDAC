@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Arrays of node names, IP addresses, and MAC addresses
+nodes=("hpc003" "hpc004" "hpc005")
+ips=("192.168.2.4" "192.168.2.5" "192.168.2.6")
+macs=("00:50:56:25:65:A5" "00:50:56:22:ED:85" "00:50:56:22:61:5C")
+
+
+
+
+# Length of arrays
+length=${#nodes[@]}
+
+# Loop through the arrays
+for ((i=0; i<$length; i++))
+do
+    node="${nodes[$i]}"
+    ip="${ips[$i]}"
+    mac="${macs[$i]}"
+
+    # Check if node definition already exists
+    if xcatdef=$(lsdef -t node "$node" 2>/dev/null); then
+        echo "Node definition for $node already exists. Skipping."
+    else
+        # Create node definition using mkdef
+        mkdef -t node "$node"
+        echo "Node definition for $node created."
+    fi
+
+    # Assign IP address and MAC address to the node
+    chdef -t node "$node" groups=compute ip="$ip" mac="$mac" netboot=xnba arch=x86_64
+    chtab key=system passwd.username=root passwd.password=abc123
+    tabdump passwd
+    echo "Assigned IP address $ip and MAC address $mac to $node."
+    nodeset hpc003 osimage=centos7.9-x86_64-install-compute
+    nodeset hpc004 osimage=centos7.9-x86_64-install-compute
+    nodeset hpc005 osimage=centos7.9-x86_64-install-compute
+done

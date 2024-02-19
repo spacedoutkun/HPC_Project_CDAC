@@ -1,0 +1,151 @@
+PowerShell 7.3.11
+
+   A new PowerShell stable release is available: v7.4.1
+   Upgrade now, or check out the release page at:
+     https://aka.ms/PowerShell-Release?tag=v7.4.1
+
+PS C:\Users\rajesh> ssh root@192.168.144.206
+root@192.168.144.206's password:
+Last login: Mon Feb 12 19:03:08 2024 from 192.168.144.1
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000    link/ether 00:0c:29:4b:0f:92 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.144.206/24 brd 192.168.144.255 scope global noprefixroute dynamic ens33
+       valid_lft 1252sec preferred_lft 1252sec
+    inet6 fe80::f77d:8e90:7c1e:9e53/64 scope link noprefixroute
+       valid_lft forever preferred_lft forever
+[root@master ~]# ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000    link/ether 00:0c:29:4b:0f:92 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.144.206/24 brd 192.168.144.255 scope global noprefixroute dynamic ens33
+       valid_lft 1197sec preferred_lft 1197sec
+    inet6 fe80::f77d:8e90:7c1e:9e53/64 scope link noprefixroute
+       valid_lft forever preferred_lft forever
+3: ens36: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000    link/ether 00:0c:29:4b:0f:9c brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::85a8:6679:6318:f181/64 scope link noprefixroute
+       valid_lft forever preferred_lft forever
+[root@master ~]# vi /etc/hosts
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# hostname
+master.demo.lab
+[root@master ~]# chtab key=system passwd.username=root passwd.password=abc123
+[root@master ~]#
+[root@master ~]# tabdump passwd
+#key,username,password,cryptmethod,authdomain,comments,disable
+"system","root","abc123",,,,
+"omapi","xcat_key","YUdLbHBVNVVOYklFUGxHOGtWSXQySzhuSE9RU29FQjA=",,,,
+[root@master ~]# makehosts
+[root@master ~]# makenetworks
+Warning: [master]: The network entry '192_168_2_0-255_255_255_0' already exists in xCAT networks table. Cannot create a definition for '192_168_2_0-255_255_255_0'
+Warning: [master]: The network entry '192_168_144_0-255_255_255_0' already exists in xCAT networks table. Cannot create a definition for '192_168_144_0-255_255_255_0'
+[root@master ~]# makenetworks -n
+Warning: [master]: The network entry '192_168_2_0-255_255_255_0' already exists in xCAT networks table. Cannot create a definition for '192_168_2_0-255_255_255_0'
+Warning: [master]: The network entry '192_168_144_0-255_255_255_0' already exists in xCAT networks table. Cannot create a definition for '192_168_144_0-255_255_255_0'
+[root@master ~]# makedhcp -n
+Renamed existing dhcp configuration file to  /etc/dhcp/dhcpd.conf.xcatbak
+
+Warning: [master]: No dynamic range specified for 192.168.2.0. If hardware discovery is being used, adynamic range is required.
+Warning: [master]: No dynamic range specified for 192.168.144.0. If hardware discovery is being used,a dynamic range is required.
+[root@master ~]# makedhcp -a
+[root@master ~]#  makedns -n
+Handling master.demo.lab in /etc/hosts.
+Handling localhost in /etc/hosts.
+Handling hpc001 in /etc/hosts.
+Handling localhost in /etc/hosts.
+Getting reverse zones, this may take several minutes for a large cluster.
+Completed getting reverse zones.
+Updating zones.
+Completed updating zones.
+Restarting named
+Restarting named complete
+Updating DNS records, this may take several minutes for a large cluster.
+Completed updating DNS records.
+DNS setup is completed
+[root@master ~]# xcatprobe xcatmn -i ens36
+[mn]: Checking all xCAT daemons are running...                                                  [ OK ]
+[mn]: Checking xcatd can receive command request...                                             [ OK ]
+[mn]: Checking 'site' table is configured...                                                    [ OK ]
+[mn]: Checking provision network is configured...                                               [ OK ]
+[mn]: Checking 'passwd' table is configured...                                                  [ OK ]
+[mn]: Checking important directories(installdir,tftpdir) are configured...                      [ OK ]
+[mn]: Checking SELinux is disabled...                                                           [ OK ]
+[mn]: Checking HTTP service is configured...                                                    [ OK ]
+[mn]: Checking TFTP service is configured...                                                    [ OK ]
+[mn]: Checking DNS service is configured...                                                     [WARN]
+[mn]: DNS nameserver 192.168.144.2 can not resolve 192.168.2.1
+[mn]: Checking DHCP service is configured...                                                    [ OK ]
+[mn]: Checking NTP service is configured...                                                     [ OK ]
+[mn]: Checking rsyslog service is configured...                                                 [ OK ]
+[mn]: Checking firewall is disabled...                                                          [ OK ]
+[mn]: Checking minimum disk space for xCAT ['/var' needs 1GB;'/install' needs 10GB;'/tmp' nee...[ OK ]
+[mn]: Checking Linux ulimits configuration...                                                   [ OK ]
+[mn]: Checking network kernel parameter configuration...                                        [ OK ]
+[mn]: Checking xCAT daemon attributes configuration...                                          [ OK ]
+[mn]: Checking xCAT log is stored in /var/log/xcat/cluster.log...                               [ OK ]
+[mn]: Checking xCAT management node IP: <192.168.2.1> is configured to static...                [ OK ]
+[mn]: Checking dhcpd.leases file is less than 100M...                                           [ OK ]
+[mn]: Checking DB packages installation...                                                      [ OK ]
+=================================== SUMMARY ====================================
+[MN]: Checking on MN...                                                                         [ OK ]
+    Checking DNS service is configured...                                                       [WARN]
+        DNS nameserver 192.168.144.2 can not resolve 192.168.2.1
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# lsdef -t osimage
+centos7.9-x86_64-install-compute  (osimage)
+centos7.9-x86_64-netboot-compute  (osimage)
+centos7.9-x86_64-statelite-compute  (osimage)
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# chdef -t node hpc001 netboot=xnba
+1 object definitions have been created or modified.
+[root@master ~]#
+[root@master ~]# lsdef -t osimage
+centos7.9-x86_64-install-compute  (osimage)
+centos7.9-x86_64-netboot-compute  (osimage)
+centos7.9-x86_64-statelite-compute  (osimage)
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# lsdef -t node hpc001
+Object name: hpc001
+    arch=x86_84
+    groups=compute
+    ip=192.168.2.2
+    mac=00:0C:29:0F:A7:F6
+    netboot=xnba
+    postbootscripts=otherpkgs
+    postscripts=syslog,remoteshell,syncfiles
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# nodeset hpc001 osimage=centos7.9-x86_64-install-compute
+hpc001: install centos7.9-x86_64-compute
+[root@master ~]#
+[root@master ~]# lsdef -t node hpc001
+Object name: hpc001
+    arch=x86_64
+    currchain=boot
+    currstate=install centos7.9-x86_64-compute
+    groups=compute
+    ip=192.168.2.2
+    mac=00:0C:29:0F:A7:F6
+    netboot=xnba
+    os=centos7.9
+    postbootscripts=otherpkgs
+    postscripts=syslog,remoteshell,syncfiles
+    profile=compute
+    provmethod=centos7.9-x86_64-install-compute
+[root@master ~]#

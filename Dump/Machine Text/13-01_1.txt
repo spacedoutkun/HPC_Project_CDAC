@@ -1,0 +1,283 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\rajesh> ssh root@192.168.144.206
+root@192.168.144.206's password:
+Last login: Tue Feb 13 02:00:19 2024
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# ls
+anaconda-ks.cfg               CentOS-7-x86_64-Minimal-2009.iso  script1.sh
+CentOS-7-x86_64-DVD-2009.iso  python1.py                        script2.sh
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# ##################DAY 2 #################
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# vim script3.sh
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# chmod +x script3.sh
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# ./script3.sh
+Error: [master]: 0 object definitions have been created or modified.
+Node definition for hpc003 created.
+Error: [master]: Attribute 'groups' is not specified for node 'hpc003', skipping to the next node.
+Error: [master]: One or more errors occured when attempting to create or modify xCAT object definitions.
+Assigned IP address 192.168.2.4 and MAC address 00:50:56:25:65:A5 to hpc003.
+Error: [master]: 0 object definitions have been created or modified.
+Node definition for hpc004 created.
+Error: [master]: Attribute 'groups' is not specified for node 'hpc004', skipping to the next node.
+Error: [master]: One or more errors occured when attempting to create or modify xCAT object definitions.
+Assigned IP address 192.168.2.5 and MAC address 00:50:56:22:ED:85 to hpc004.
+Error: [master]: 0 object definitions have been created or modified.
+Node definition for hpc005 created.
+Error: [master]: Attribute 'groups' is not specified for node 'hpc005', skipping to the next node.
+Error: [master]: One or more errors occured when attempting to create or modify xCAT object definitions.
+Assigned IP address 192.168.2.6 and MAC address 00:50:56:22:61:5C to hpc005.
+[root@master ~]# lsdef -t node
+cn003  (node)
+hpc001  (node)
+hpc002  (node)
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# vim script3.sh
+[root@master ~]# vim script3.sh
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# ./script3.sh
+Error: [master]: 0 object definitions have been created or modified.
+Node definition for hpc003 created.
+1 object definitions have been created or modified.
+New object definitions 'hpc003' have been created.
+#key,username,password,cryptmethod,authdomain,comments,disable
+"system","root","abc123",,,,
+"omapi","xcat_key","YUdLbHBVNVVOYklFUGxHOGtWSXQySzhuSE9RU29FQjA=",,,,
+Assigned IP address 192.168.2.4 and MAC address 00:50:56:25:65:A5 to hpc003.
+Error: [master]: 0 object definitions have been created or modified.
+Node definition for hpc004 created.
+1 object definitions have been created or modified.
+New object definitions 'hpc004' have been created.
+#key,username,password,cryptmethod,authdomain,comments,disable
+"system","root","abc123",,,,
+"omapi","xcat_key","YUdLbHBVNVVOYklFUGxHOGtWSXQySzhuSE9RU29FQjA=",,,,
+Assigned IP address 192.168.2.5 and MAC address 00:50:56:22:ED:85 to hpc004.
+Error: [master]: 0 object definitions have been created or modified.
+Node definition for hpc005 created.
+1 object definitions have been created or modified.
+New object definitions 'hpc005' have been created.
+#key,username,password,cryptmethod,authdomain,comments,disable
+"system","root","abc123",,,,
+"omapi","xcat_key","YUdLbHBVNVVOYklFUGxHOGtWSXQySzhuSE9RU29FQjA=",,,,
+Assigned IP address 192.168.2.6 and MAC address 00:50:56:22:61:5C to hpc005.
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# lsdef -t node
+cn003  (node)
+hpc001  (node)
+hpc002  (node)
+hpc003  (node)
+hpc004  (node)
+hpc005  (node)
+[root@master ~]# lsdef -t node hpc003
+Object name: hpc003
+    arch=x86_64
+    groups=compute
+    ip=192.168.2.4
+    mac=00:50:56:25:65:A5
+    netboot=xnba
+    postbootscripts=otherpkgs
+    postscripts=syslog,remoteshell,syncfiles
+[root@master ~]# lsdef -t node hpc004
+Object name: hpc004
+    arch=x86_64
+    groups=compute
+    ip=192.168.2.5
+    mac=00:50:56:22:ED:85
+    netboot=xnba
+    postbootscripts=otherpkgs
+    postscripts=syslog,remoteshell,syncfiles
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# lsdef -t node hpc005
+Object name: hpc005
+    arch=x86_64
+    groups=compute
+    ip=192.168.2.6
+    mac=00:50:56:22:61:5C
+    netboot=xnba
+    postbootscripts=otherpkgs
+    postscripts=syslog,remoteshell,syncfiles
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# vim script3.sh
+[root@master ~]# [root@master ~]# makehosts
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# vim script3.sh^C
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# makenetworks
+Warning: [master]: The network entry '192_168_2_0-255_255_255_0' already exists in xCAT networks table. Cannot create a definition for '192_168_2_0-255_255_255_0'
+Warning: [master]: The network entry '192_168_144_0-255_255_255_0' already exists in xCAT networks table. Cannot create a definition for '192_168_144_0-255_255_255_0'
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# makenetworks -n
+Warning: [master]: The network entry '192_168_2_0-255_255_255_0' already exists in xCAT networks table. Cannot create a definition for '192_168_2_0-255_255_255_0'
+Warning: [master]: The network entry '192_168_144_0-255_255_255_0' already exists in xCAT networks table. Cannot create a definition for '192_168_144_0-255_255_255_0'
+[root@master ~]#
+[root@master ~]# makenetworks -a
+Warning: [master]: The network entry '192_168_2_0-255_255_255_0' already exists in xCAT networks table. Cannot create a definition for '192_168_2_0-255_255_255_0'
+Warning: [master]: The network entry '192_168_144_0-255_255_255_0' already exists in xCAT networks table. Cannot create a definition for '192_168_144_0-255_255_255_0'
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# makedhcp -n
+Renamed existing dhcp configuration file to  /etc/dhcp/dhcpd.conf.xcatbak
+
+Warning: [master]: No dynamic range specified for 192.168.2.0. If hardware discovery is being used, a dynamic range is required.
+Warning: [master]: No dynamic range specified for 192.168.144.0. If hardware discovery is being used, a dynamic range is required.
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# makedhcp -a
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# makedns -b
+
+  makedns - sets up domain name services (DNS).
+  Usage:
+        makedns [-h|--help ]
+        makedns [-V|--verbose]
+        makedns [-V|--verbose] [-e|--external] [-n|--new ] [noderange]
+        makedns [-V|--verbose] [-e|--external] [-d|--delete noderange]
+
+[root@master ~]# makedns -n
+Handling master.demo.lab in /etc/hosts.
+Handling localhost in /etc/hosts.
+Handling hpc005 in /etc/hosts.
+Handling hpc002 in /etc/hosts.
+Handling localhost in /etc/hosts.
+Handling hpc003 in /etc/hosts.
+Handling hpc001 in /etc/hosts.
+Handling hpc004 in /etc/hosts.
+Getting reverse zones, this may take several minutes for a large cluster.
+Completed getting reverse zones.
+Updating zones.
+Completed updating zones.
+Restarting named
+Restarting named complete
+Updating DNS records, this may take several minutes for a large cluster.
+Completed updating DNS records.
+DNS setup is completed
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# makedns -a
+Getting reverse zones, this may take several minutes for a large cluster.
+Completed getting reverse zones.
+Updating zones.
+Completed updating zones.
+Updating DNS records, this may take several minutes for a large cluster.
+Completed updating DNS records.
+DNS setup is completed
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# lsdef -t osimage
+centos7.9-x86_64-install-compute  (osimage)
+centos7.9-x86_64-netboot-compute  (osimage)
+centos7.9-x86_64-statelite-compute  (osimage)
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# #nodeset compute osimage=centos7.9-x86_64-install-compute
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# nodeset hpc004 osimage=centos7.9-x86_64-install-compute
+hpc004: install centos7.9-x86_64-compute
+[root@master ~]#
+[root@master ~]# lsdef -t node hpc004
+Object name: hpc004
+    arch=x86_64
+    currchain=boot
+    currstate=install centos7.9-x86_64-compute
+    groups=compute
+    ip=192.168.2.5
+    mac=00:50:56:22:ED:85
+    netboot=xnba
+    os=centos7.9
+    postbootscripts=otherpkgs
+    postscripts=syslog,remoteshell,syncfiles
+    profile=compute
+    provmethod=centos7.9-x86_64-install-compute
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# lsdef -t node hpc003
+Object name: hpc003
+    arch=x86_64
+    groups=compute
+    ip=192.168.2.4
+    mac=00:50:56:25:65:A5
+    netboot=xnba
+    postbootscripts=otherpkgs
+    postscripts=syslog,remoteshell,syncfiles
+    status=booted
+    statustime=02-13-2024 02:33:23
+[root@master ~]# lsdef -t node hpc005
+Object name: hpc005
+    arch=x86_64
+    groups=compute
+    ip=192.168.2.6
+    mac=00:50:56:22:61:5C
+    netboot=xnba
+    postbootscripts=otherpkgs
+    postscripts=syslog,remoteshell,syncfiles
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# nodeset hpc005 osimage=centos7.9-x86_64-install-compute
+hpc005: install centos7.9-x86_64-compute
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# ls
+anaconda-ks.cfg               CentOS-7-x86_64-Minimal-2009.iso  script1.sh  script3.sh
+CentOS-7-x86_64-DVD-2009.iso  python1.py                        script2.sh
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#

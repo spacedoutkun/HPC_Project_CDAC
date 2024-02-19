@@ -1,0 +1,717 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\rajesh> ssh root@192.168.144.206
+root@192.168.144.206's password:
+Last login: Thu Feb 15 02:00:11 2024
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#  systemctl status slurmctld
+● slurmctld.service - Slurm controller daemon
+   Loaded: loaded (/usr/lib/systemd/system/slurmctld.service; enabled; vendor preset: disabled)
+   Active: active (running) since Thu 2024-02-15 01:43:42 IST; 2h 5min ago
+ Main PID: 1073 (slurmctld)
+   CGroup: /system.slice/slurmctld.service
+           ├─1073 /usr/sbin/slurmctld -D -s
+           └─1121 slurmctld: slurmscriptd
+
+Feb 15 01:58:34 master.demo.lab slurmctld[1073]: slurmctld: error: slurm_jobcomp plugin context not initialized
+Feb 15 01:58:34 master.demo.lab slurmctld[1073]: slurmctld: _job_complete: JobId=12 done
+Feb 15 01:58:43 master.demo.lab slurmctld[1073]: slurmctld: error: Nodes hpc003.demo.lab,master.demo.lab not responding
+Feb 15 02:03:43 master.demo.lab slurmctld[1073]: slurmctld: error: Nodes master.demo.lab not responding
+Feb 15 02:04:00 master.demo.lab slurmctld[1073]: slurmctld: error: Nodes master.demo.lab not responding, setting DOWN
+Feb 15 02:04:39 master.demo.lab slurmctld[1073]: slurmctld: sched: Allocate JobId=13 NodeList=hpc002.demo.lab,hp...n=hpcFeb 15 02:04:39 master.demo.lab slurmctld[1073]: slurmctld: _job_complete: JobId=13WEXITSTATUS 0
+Feb 15 02:04:39 master.demo.lab slurmctld[1073]: slurmctld: error: slurm_jobcomp plugin context not initialized
+Feb 15 02:04:39 master.demo.lab slurmctld[1073]: slurmctld: _job_complete: JobId=13 done
+Feb 15 02:57:20 master.demo.lab slurmctld[1073]: slurmctld: error: Nodes hpc002.demo.lab,hpc003.demo.lab not res... DOWNHint: Some lines were ellipsized, use -l to show in full.
+[root@master ~]#
+[root@master ~]#  systemctl status slurmdbd
+● slurmdbd.service - Slurm DBD accounting daemon
+   Loaded: loaded (/usr/lib/systemd/system/slurmdbd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Thu 2024-02-15 01:43:45 IST; 2h 5min ago
+ Main PID: 1840 (slurmdbd)
+   CGroup: /system.slice/slurmdbd.service
+           └─1840 /usr/sbin/slurmdbd -D -s
+
+Feb 15 01:43:45 master.demo.lab systemd[1]: Started Slurm DBD accounting daemon.
+Feb 15 01:43:45 master.demo.lab slurmdbd[1840]: (null): _log_init: Unable to open logfile `/var/log/slurm/slurmd...ctoryFeb 15 01:43:45 master.demo.lab slurmdbd[1840]: slurmdbd: accounting_storage/as_mysql: _check_mysql_concat_is_sa...riaDBFeb 15 01:43:45 master.demo.lab slurmdbd[1840]: slurmdbd: error: Database settings not recommended values: innod...meoutFeb 15 01:43:45 master.demo.lab slurmdbd[1840]:slurmdbd: slurmdbd version 21.08.8-2 started
+Hint: Some lines were ellipsized, use -l to show in full.
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#  systemctl status slurmd
+● slurmd.service - Slurm node daemon
+   Loaded: loaded (/usr/lib/systemd/system/slurmd.service; disabled; vendor preset: disabled)
+   Active: inactive (dead)
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#  systemctl status munge
+● munge.service - MUNGE authentication service
+   Loaded: loaded (/usr/lib/systemd/system/munge.service; enabled; vendor preset: disabled)
+   Active: active (running) since Thu 2024-02-15 01:43:42 IST; 2h 5min ago
+     Docs: man:munged(8)
+ Main PID: 1051 (munged)
+   CGroup: /system.slice/munge.service
+           └─1051 /usr/sbin/munged
+
+Feb 15 01:43:42 master.demo.lab systemd[1]: Starting MUNGE authentication service...
+Feb 15 01:43:42 master.demo.lab systemd[1]: Started MUNGE authentication service.
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#  systemctl status slurmd
+● slurmd.service - Slurm node daemon
+   Loaded: loaded (/usr/lib/systemd/system/slurmd.service; disabled; vendor preset: disabled)
+   Active: inactive (dead)
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# sinfo
+PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+debug        up   infinite      3  down* hpc002.demo.lab,hpc003.demo.lab,master.demo.lab
+hpc*         up   infinite      3  down* hpc002.demo.lab,hpc003.demo.lab,master.demo.lab
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#  systemctl restart slurmd
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#  systemctl status slurmd
+● slurmd.service - Slurm node daemon
+   Loaded: loaded (/usr/lib/systemd/system/slurmd.service; disabled; vendor preset: disabled)
+   Active: active (running) since Thu 2024-02-15 03:50:25 IST; 4s ago
+ Main PID: 20808 (slurmd)
+    Tasks: 1
+   Memory: 2.8M
+   CGroup: /system.slice/slurmd.service
+           └─20808 /usr/sbin/slurmd -D -s
+
+Feb 15 03:50:25 master.demo.lab systemd[1]: Started Slurm node daemon.
+Feb 15 03:50:25 master.demo.lab slurmd[20808]: slurmd: error: Node configuration differs from hardware: CPUs=1:4...1(hw)Feb 15 03:50:25 master.demo.lab slurmd[20808]: slurmd: slurmd version 21.08.8-2 started
+Feb 15 03:50:25 master.demo.lab slurmd[20808]: slurmd: slurmd started on Thu, 15 Feb 2024 03:50:25 +0530
+Feb 15 03:50:25 master.demo.lab slurmd[20808]: slurmd: CPUs=1 Boards=1 Sockets=1 Cores=1 Threads=1 Memory=7802 T...null)Hint: Some lines were ellipsized, use -l to show in full.
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# sinfo
+PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+debug        up   infinite      2  down* hpc002.demo.lab,hpc003.demo.lab
+debug        up   infinite      1   idle master.demo.lab
+hpc*         up   infinite      2  down* hpc002.demo.lab,hpc003.demo.lab
+hpc*         up   infinite      1   idle master.demo.lab
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# scontrol update NodeName=hpc002.demo.lab State=RESUME
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# scontrol update NodeName=hpc003.demo.lab State=RESUME
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# sinfo
+PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+debug        up   infinite      3   idle hpc002.demo.lab,hpc003.demo.lab,master.demo.lab
+hpc*         up   infinite      3   idle hpc002.demo.lab,hpc003.demo.lab,master.demo.lab
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]#
+[root@master ~]# ls
+anaconda-ks.cfg   CentOS-7-x86_64-DVD-2009.iso      nfs         script1.sh  slurm-21.08.8-2.tar.bz2
+ansible           CentOS-7-x86_64-Minimal-2009.iso  python1.py  script2.sh  slurm-21.08.8.tar.bz2
+ansible-practice  history1.txt                      rpmbuild    script3.sh
+[root@master ~]#
+[root@master ~]# cd /nfs/
+hpc/        lost+found/ slurm-rpms/
+[root@master ~]# cd /nfs/slurm-rpms/
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]# ls
+1.sh        myscript1.sh                                    slurm-openlava-21.08.8-2.el7.x86_64.rpm
+job.11.err  myscript.sh                                     slurm-pam_slurm-21.08.8-2.el7.x86_64.rpm
+job.12.err  py1.py                                          slurm-perlapi-21.08.8-2.el7.x86_64.rpm
+job.13.err  slurm-21.08.8-2.el7.x86_64.rpm                  slurm-slurmctld-21.08.8-2.el7.x86_64.rpm
+job.1.err   slurm-contribs-21.08.8-2.el7.x86_64.rpm         slurm-slurmd-21.08.8-2.el7.x86_64.rpm
+job.1.out   slurm-devel-21.08.8-2.el7.x86_64.rpm            slurm-slurmdbd-21.08.8-2.el7.x86_64.rpm
+job.2.err   slurm-example-configs-21.08.8-2.el7.x86_64.rpm  slurm-torque-21.08.8-2.el7.x86_64.rpm
+job.4.err   slurm-libpmi-21.08.8-2.el7.x86_64.rpm
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]# sbatch myscript1.sh
+Submitted batch job 14
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]# scontrol show job 14
+JobId=14 JobName=activity1
+   UserId=root(0) GroupId=root(0) MCS_label=N/A
+   Priority=4294901746 Nice=0 Account=root QOS=normal
+   JobState=COMPLETED Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:00 TimeLimit=365-00:00:00 TimeMin=N/A
+   SubmitTime=2024-02-15T03:52:44 EligibleTime=2024-02-15T03:52:44
+   AccrueTime=2024-02-15T03:52:44
+   StartTime=2024-02-15T03:52:45 EndTime=2024-02-15T03:52:45 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2024-02-15T03:52:45 Scheduler=Backfill
+   Partition=hpc AllocNode:Sid=master:20534
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=hpc002.demo.lab,hpc003.demo.lab
+   BatchHost=hpc002.demo.lab
+   NumNodes=2 NumCPUs=2 NumTasks=2 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
+   TRES=cpu=2,node=2,billing=2
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=1 MinMemoryNode=0 MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=NO Contiguous=0 Licenses=(null) Network=(null)
+   Command=/nfs/slurm-rpms/myscript1.sh
+   WorkDir=/nfs/slurm-rpms
+   StdErr=/nfs/slurm-rpms/job.%J.err
+   StdIn=/dev/null
+   StdOut=/nfs/slurm-rpms/1.sh
+   Power=
+
+
+[root@master slurm-rpms]# pwd
+/nfs/slurm-rpms
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]# ls
+1.sh        job.4.err                                       slurm-openlava-21.08.8-2.el7.x86_64.rpm
+job.11.err  myscript1.sh                                    slurm-pam_slurm-21.08.8-2.el7.x86_64.rpm
+job.12.err  myscript.sh                                     slurm-perlapi-21.08.8-2.el7.x86_64.rpm
+job.13.err  py1.py                                          slurm-slurmctld-21.08.8-2.el7.x86_64.rpm
+job.14.err  slurm-21.08.8-2.el7.x86_64.rpm                  slurm-slurmd-21.08.8-2.el7.x86_64.rpm
+job.15.err  slurm-contribs-21.08.8-2.el7.x86_64.rpm         slurm-slurmdbd-21.08.8-2.el7.x86_64.rpm
+job.1.err   slurm-devel-21.08.8-2.el7.x86_64.rpm            slurm-torque-21.08.8-2.el7.x86_64.rpm
+job.1.out   slurm-example-configs-21.08.8-2.el7.x86_64.rpm
+job.2.err   slurm-libpmi-21.08.8-2.el7.x86_64.rpm
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]# scontrol show job 15
+JobId=15 JobName=activity1
+   UserId=root(0) GroupId=root(0) MCS_label=N/A
+   Priority=4294901745 Nice=0 Account=root QOS=normal
+   JobState=COMPLETED Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:00 TimeLimit=UNLIMITED TimeMin=N/A
+   SubmitTime=2024-02-15T04:12:24 EligibleTime=2024-02-15T04:12:24
+   AccrueTime=2024-02-15T04:12:24
+   StartTime=2024-02-15T04:12:25 EndTime=2024-02-15T04:12:25 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2024-02-15T04:12:25 Scheduler=Main
+   Partition=hpc AllocNode:Sid=master:22599
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=hpc002.demo.lab,hpc003.demo.lab
+   BatchHost=hpc002.demo.lab
+   NumNodes=2 NumCPUs=2 NumTasks=2 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
+   TRES=cpu=2,node=2,billing=2
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=1 MinMemoryNode=0 MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=NO Contiguous=0 Licenses=(null) Network=(null)
+   Command=/nfs/slurm-rpms/myscript1.sh
+   WorkDir=/nfs/slurm-rpms
+   StdErr=/nfs/slurm-rpms/job.%J.err
+   StdIn=/dev/null
+   StdOut=/nfs/slurm-rpms/1.sh
+   Power=
+
+
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]# ls
+1.sh        job.1.err                                slurm-example-configs-21.08.8-2.el7.x86_64.rpm
+job.11.err  job.1.out                                slurm-libpmi-21.08.8-2.el7.x86_64.rpm
+job.12.err  job.2.err                                slurm-openlava-21.08.8-2.el7.x86_64.rpm
+job.13.err  job.4.err                                slurm-pam_slurm-21.08.8-2.el7.x86_64.rpm
+job.14.err  myscript1.sh                             slurm-perlapi-21.08.8-2.el7.x86_64.rpm
+job.15.err  myscript.sh                              slurm-slurmctld-21.08.8-2.el7.x86_64.rpm
+job.16.err  py1.py                                   slurm-slurmd-21.08.8-2.el7.x86_64.rpm
+job.17.err  slurm-21.08.8-2.el7.x86_64.rpm           slurm-slurmdbd-21.08.8-2.el7.x86_64.rpm
+job.18.err  slurm-contribs-21.08.8-2.el7.x86_64.rpm  slurm-torque-21.08.8-2.el7.x86_64.rpm
+job.19.err  slurm-devel-21.08.8-2.el7.x86_64.rpm
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]# ls
+1.sh        job.1.err                                slurm-example-configs-21.08.8-2.el7.x86_64.rpm
+job.11.err  job.1.out                                slurm-libpmi-21.08.8-2.el7.x86_64.rpm
+job.12.err  job.2.err                                slurm-openlava-21.08.8-2.el7.x86_64.rpm
+job.13.err  job.4.err                                slurm-pam_slurm-21.08.8-2.el7.x86_64.rpm
+job.14.err  myscript1.sh                             slurm-perlapi-21.08.8-2.el7.x86_64.rpm
+job.15.err  myscript.sh                              slurm-slurmctld-21.08.8-2.el7.x86_64.rpm
+job.16.err  py1.py                                   slurm-slurmd-21.08.8-2.el7.x86_64.rpm
+job.17.err  slurm-21.08.8-2.el7.x86_64.rpm           slurm-slurmdbd-21.08.8-2.el7.x86_64.rpm
+job.18.err  slurm-contribs-21.08.8-2.el7.x86_64.rpm  slurm-torque-21.08.8-2.el7.x86_64.rpm
+job.19.err  slurm-devel-21.08.8-2.el7.x86_64.rpm
+[root@master slurm-rpms]# ls
+1.sh        job.1.err                                slurm-example-configs-21.08.8-2.el7.x86_64.rpm
+job.11.err  job.1.out                                slurm-libpmi-21.08.8-2.el7.x86_64.rpm
+job.12.err  job.2.err                                slurm-openlava-21.08.8-2.el7.x86_64.rpm
+job.13.err  job.4.err                                slurm-pam_slurm-21.08.8-2.el7.x86_64.rpm
+job.14.err  myscript1.sh                             slurm-perlapi-21.08.8-2.el7.x86_64.rpm
+job.15.err  myscript.sh                              slurm-slurmctld-21.08.8-2.el7.x86_64.rpm
+job.16.err  py1.py                                   slurm-slurmd-21.08.8-2.el7.x86_64.rpm
+job.17.err  slurm-21.08.8-2.el7.x86_64.rpm           slurm-slurmdbd-21.08.8-2.el7.x86_64.rpm
+job.18.err  slurm-contribs-21.08.8-2.el7.x86_64.rpm  slurm-torque-21.08.8-2.el7.x86_64.rpm
+job.19.err  slurm-devel-21.08.8-2.el7.x86_64.rpm
+[root@master slurm-rpms]# git clone https://github.com/Sandip1717/HPC_Project.git
+Cloning into 'HPC_Project'...
+remote: Enumerating objects: 54, done.
+remote: Total 54 (delta 0), reused 0 (delta 0), pack-reused 54
+Unpacking objects: 100% (54/54), done.
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]#
+[root@master slurm-rpms]# ls
+1.sh         job.19.err                               slurm-devel-21.08.8-2.el7.x86_64.rpm
+HPC_Project  job.1.err                                slurm-example-configs-21.08.8-2.el7.x86_64.rpm
+job.11.err   job.1.out                                slurm-libpmi-21.08.8-2.el7.x86_64.rpm
+job.12.err   job.2.err                                slurm-openlava-21.08.8-2.el7.x86_64.rpm
+job.13.err   job.4.err                                slurm-pam_slurm-21.08.8-2.el7.x86_64.rpm
+job.14.err   myscript1.sh                             slurm-perlapi-21.08.8-2.el7.x86_64.rpm
+job.15.err   myscript.sh                              slurm-slurmctld-21.08.8-2.el7.x86_64.rpm
+job.16.err   py1.py                                   slurm-slurmd-21.08.8-2.el7.x86_64.rpm
+job.17.err   slurm-21.08.8-2.el7.x86_64.rpm           slurm-slurmdbd-21.08.8-2.el7.x86_64.rpm
+job.18.err   slurm-contribs-21.08.8-2.el7.x86_64.rpm  slurm-torque-21.08.8-2.el7.x86_64.rpm
+[root@master slurm-rpms]#
+[root@master slurm-rpms]# cd HPC_Project/
+[root@master HPC_Project]# ls
+README.md  Screenshots  Text  xcat_script.txt
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]# pwd
+/nfs/slurm-rpms/HPC_Project
+[root@master HPC_Project]# ls
+Application-Deploy.zip  README.md  Screenshots  Text  xcat_script.txt
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]# git add Application-Deploy.zip
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]# git status
+# On branch main
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#       new file:   Application-Deploy.zip
+#
+[root@master HPC_Project]# git log
+commit e0c14e115faa207fa401dbf5c607f341ff24a6ab
+Author: Sandip1717 <68017776+Sandip1717@users.noreply.github.com>
+Date:   Mon Feb 12 20:26:25 2024 +0530
+
+    Add files via upload
+
+commit aa892519b92da0cd562195326e505f545f747683
+Author: Sandip1717 <68017776+Sandip1717@users.noreply.github.com>
+Date:   Mon Feb 12 18:26:01 2024 +0530
+
+    Add files via upload
+
+commit 055ca3398e0d72c3d61caf6695b1646c4ee352f3
+Author: Sandip1717 <68017776+Sandip1717@users.noreply.github.com>
+Date:   Mon Feb 12 18:23:39 2024 +0530
+
+    Add files via upload
+
+commit 1d8bb453bf8e59f16f14110b33ca1d773242cc15
+Author: Sandip1717 <68017776+Sandip1717@users.noreply.github.com>
+Date:   Mon Feb 12 18:20:49 2024 +0530
+
+    Initial commit
+[root@master HPC_Project]# git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Username for 'https://github.com': Sandip1717
+Password for 'https://Sandip1717@github.com':
+fatal: Authentication failed for 'https://github.com/Sandip1717/HPC_Project.git/'
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]# 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^C
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]# git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Username for 'https://github.com': Sandip1771
+Password for 'https://Sandip1771@github.com':
+[root@master HPC_Project]# git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Username for 'https://github.com': Sandip1717
+Password for 'https://Sandip1717@github.com':
+Everything up-to-date
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]# ls
+Application-Deploy.zip  README.md  Screenshots  Text  xcat_script.txt
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]# git push Application-Deploy.zip
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+fatal: Invalid gitfile format: Application-Deploy.zip
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]# ls
+Application-Deploy.zip  README.md  Screenshots  Text  xcat_script.txt
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]# git log
+commit e0c14e115faa207fa401dbf5c607f341ff24a6ab
+Author: Sandip1717 <68017776+Sandip1717@users.noreply.github.com>
+Date:   Mon Feb 12 20:26:25 2024 +0530
+
+    Add files via upload
+
+commit aa892519b92da0cd562195326e505f545f747683
+Author: Sandip1717 <68017776+Sandip1717@users.noreply.github.com>
+Date:   Mon Feb 12 18:26:01 2024 +0530
+
+    Add files via upload
+
+commit 055ca3398e0d72c3d61caf6695b1646c4ee352f3
+Author: Sandip1717 <68017776+Sandip1717@users.noreply.github.com>
+Date:   Mon Feb 12 18:23:39 2024 +0530
+
+    Add files via upload
+
+commit 1d8bb453bf8e59f16f14110b33ca1d773242cc15
+Author: Sandip1717 <68017776+Sandip1717@users.noreply.github.com>
+Date:   Mon Feb 12 18:20:49 2024 +0530
+
+    Initial commit
+[root@master HPC_Project]# git  status
+# On branch main
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#       new file:   Application-Deploy.zip
+#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]# git commit -m "Application deploy"
+[main 225da4d] Application deploy
+ Committer: root <root@master.demo.lab>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 Application-Deploy.zip
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]# git  status
+# On branch main
+# Your branch is ahead of 'origin/main' by 1 commit.
+#   (use "git push" to publish your local commits)
+#
+nothing to commit, working directory clean
+[root@master HPC_Project]# git log
+commit 225da4dda24b41f6e8feb315c4346b650547c90a
+Author: root <root@master.demo.lab>
+Date:   Thu Feb 15 04:37:13 2024 +0530
+
+    Application deploy
+
+commit e0c14e115faa207fa401dbf5c607f341ff24a6ab
+Author: Sandip1717 <68017776+Sandip1717@users.noreply.github.com>
+Date:   Mon Feb 12 20:26:25 2024 +0530
+
+    Add files via upload
+
+commit aa892519b92da0cd562195326e505f545f747683
+Author: Sandip1717 <68017776+Sandip1717@users.noreply.github.com>
+Date:   Mon Feb 12 18:26:01 2024 +0530
+
+    Add files via upload
+
+commit 055ca3398e0d72c3d61caf6695b1646c4ee352f3
+Author: Sandip1717 <68017776+Sandip1717@users.noreply.github.com>
+Date:   Mon Feb 12 18:23:39 2024 +0530
+
+    Add files via upload
+
+commit 1d8bb453bf8e59f16f14110b33ca1d773242cc15
+Author: Sandip1717 <68017776+Sandip1717@users.noreply.github.com>
+Date:   Mon Feb 12 18:20:49 2024 +0530
+
+    Initial commit
+[root@master HPC_Project]#
+[root@master HPC_Project]# git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Username for 'https://github.com': Sandip1717
+Password for 'https://Sandip1717@github.com':
+Counting objects: 4, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 76.03 MiB | 7.17 MiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote: warning: See https://gh.io/lfs for more information.
+remote: warning: File Application-Deploy.zip is 76.03 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB
+remote: warning: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.
+remote: To https://github.com/Sandip1717/HPC_Project.git
+   e0c14e1..225da4d  main -> main
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]# ls
+Application-Deploy.zip  README.md  Screenshots  Text  xcat_script.txt
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]# gunzip Application-Deploy.zip
+gzip: Application-Deploy.zip: unknown suffix -- ignored
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]# unzip Application-Deploy.zip
+Archive:  Application-Deploy.zip
+   creating: Application-Deploy/
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/Blended.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/BNWOutput.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/Dilation.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/Erosion.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/Input.jpg
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/.gitattributes
+
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Images/
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Images/carlos-quintero-hAb_8YM2kJw-unsplash.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Images/danika-perkinson-QxHJ9lkXYNk-unsplash.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Images/flowers.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Images/laura-smetsers-St08jKkPVHw-unsplash.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Images/maksym-ivashchenko-wE2NUjp-I8s-unsplash.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Images/milada-vigerova-n1Y2tKFvN1Y-unsplash.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Images/person.jpg
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/Blended.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/BNWOutput.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/Dilation.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/Erosion.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/flowers.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/flowers.jpgsBlurred.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/flowersBlurred.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/image-0.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/image-1.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/image-2.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/image-3.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/image-4.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/image-5.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/image-6.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/Input.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/landscape1.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/landscape2.jpg
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/OS_Benchmarking.py
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Project/OS_Project/OS_Benchmarking_U.py
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/README.md
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Agrawal_Results/
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Agrawal_Results/Ubuntu/
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Agrawal_Results/Ubuntu/Pictures/
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Agrawal_Results/Ubuntu/Pictures/bw1.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Agrawal_Results/Ubuntu/Pictures/custom matrix.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Agrawal_Results/Ubuntu/Pictures/defaultbenchmark.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Agrawal_Results/Ubuntu/Pictures/singlecore.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Agrawal_Results/Ubuntu/Pictures/wb2.png
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Agrawal_Results/windows/
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Agrawal_Results/windows/BW1.PNG
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Agrawal_Results/windows/BW2.PNG
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Agrawal_Results/windows/custom.PNG
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Agrawal_Results/windows/default1.PNG
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Agrawal_Results/windows/default2.PNG
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Agrawal_Results/windows/default3.PNG
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Agrawal_Results/windows/single core.PNG
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Mihir_Results/
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Mihir_Results/Windows/
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Mihir_Results/Windows/BW1.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Mihir_Results/Windows/BW2.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Mihir_Results/Windows/Custom matrix.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Mihir_Results/Windows/Default1.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Mihir_Results/Windows/Default2.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Mihir_Results/Windows/Default3.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Mihir_Results/Windows/Default4.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Mihir_Results/Windows/Single core.png
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/macOS/
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/macOS/BW1.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/macOS/BW2.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/macOS/Custom matrix.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/macOS/Default 1(1).png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/macOS/Default 1.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/macOS/Default 2.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/macOS/Default 3.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/macOS/Single core.png
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/Ubuntu/
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/Ubuntu/BW1.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/Ubuntu/BW2.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/Ubuntu/Custom matrix.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/Ubuntu/Default 1.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/Ubuntu/Default 2.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/Ubuntu/Single core.png
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/Windows/
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/Windows/BW1.PNG
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/Windows/BW2.PNG
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/Windows/Custom matrix.PNG
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/Windows/Default 2.PNG
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/Windows/Default 3.PNG
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/Windows/Default 4.PNG
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/Windows/Default.PNG
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Rithvik_Results/Windows/Single core.PNG
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/Ubuntu/
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/Ubuntu/BW1.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/Ubuntu/BW2.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/Ubuntu/Custom matrix.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/Ubuntu/Default 1.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/Ubuntu/Default 2.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/Ubuntu/Default 3.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/Ubuntu/Multi core default.png
+   creating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/Windows/
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/Windows/BW1.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/Windows/BW2.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/Windows/Custom matrix.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/Windows/Default 1.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/Windows/Default 2.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/Windows/Default 3.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/Windows/Multi core default.png
+  inflating: Application-Deploy/OS-Benchmarking-Tool-main(3)/OS-Benchmarking-Tool-main/Results/Suresh_Results/Windows/Single core.png
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]# ls
+Application-Deploy  Application-Deploy.zip  README.md  Screenshots  Text  xcat_script.txt
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]# pwd
+/nfs/slurm-rpms/HPC_Project
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]# ls
+Application-Deploy  Application-Deploy.zip  README.md  Screenshots  Text  xcat_script.txt
+[root@master HPC_Project]#
+[root@master HPC_Project]#
+[root@master HPC_Project]#

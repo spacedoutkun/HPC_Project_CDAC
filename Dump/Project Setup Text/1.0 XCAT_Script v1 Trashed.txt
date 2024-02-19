@@ -1,0 +1,79 @@
+# !/bin/bash
+# To declare static Array
+arr=(1 2)
+
+# loops iterate through a
+# set of values until the
+# list (arr) is exhausted
+
+node_name=("hpc003","hpc004")
+ip_add=("192.168.2.4","192.168.2.5")
+mac_add=("00:50:56:25:65:A5","00:50:56:29:B5:B3")
+
+
+#for i in ${node_name[@]} ; do
+
+    i=0
+    len=2
+    while [ $i -lt $len ];
+    do
+    mkdef -t node ${node_name} groups=compute ip=${ip_add} mac=${mac_add} netboot=xnba arch=x86_64 -f
+    chtab key=system passwd.username=root passwd.password=abc123
+    tabdump passwd
+    echo "======================================================"
+    # access each element
+    # as $i
+    echo $i
+    lsdef -t node ${node_name}
+    echo "======================================================"
+    let i++
+    done
+
+
+######################################
+
+
+
+# !/bin/bash
+# To declare static Array
+
+#arr=(1 2)
+
+# loops iterate through a
+# set of values until the
+# list (arr) is exhausted
+
+node_name=(hpc003 hpc004)
+ip_add=(192.168.2.4 192.168.2.5)
+mac_add=(00:50:56:25:65:A5 00:50:56:29:B5:B3)
+
+
+#for i in ${node_name[@]} ; do
+
+    i=0
+    len=2
+    while [ $i -lt $len ];
+    do
+
+    echo ${ip_add[$i]}
+    mkdef -t node ${node_name[$i]} groups=compute ip=${ip_add[$i]} mac=${mac_add[$i]} netboot=xnba arch=x86_64 -f
+    chtab key=system passwd.username=root passwd.password=abc123
+    tabdump passwd
+    echo "======================================================"
+    # access each element
+    # as $i
+    echo $i
+    lsdef -t node ${node_name}
+    #makehosts
+    #nodeset ${node_name} osimage=centos7.9-x86_64-install-compute
+    echo "======================================================"
+    let i++
+    done
+
+    for i in "${ip_add[@]}"; do
+    echo "$i"
+    done
+    #for  i in "${ip_add[@]}" && j in "${mac_add[@]}"; do
+    #echo "$i"
+    #echo "$j"
+    #done

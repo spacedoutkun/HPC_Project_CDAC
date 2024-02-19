@@ -1,0 +1,60 @@
+/nfs/slurm-rpms/detecting_fake_news-main/detecting_fake_news-main
+
+
+
+
+pipeline{
+    agent any
+    stages{
+        stage('fetch-code'){
+            steps{
+                sh '''
+                #cd /practice/jenkins-demo
+                #git pull
+              
+                '''
+            }
+        }
+        stage('install-python3'){
+            steps{
+                
+                sh '''
+                #cd /demo/Docker_jenkins/
+                #docker build -t jenkins_app .
+                #ocker save jenkins_app > jenkins_app.tar
+                #scp jenkins_app.tar root@192.168.144.213:
+                
+                #ssh root@192.168.144.206 'yum  install python3 -y'
+                
+                #ssh -t root@192.168.144.213 'sudo docker load < jenkins_app.tar'
+                
+                ssh -t root@192.168.144.213
+                
+                '''
+            }
+        }
+        
+         stage('deploy-image-pip'){
+            steps{
+                sh '''
+                ssh -t root@192.168.144.213 sudo docker stop webapp1
+                ssh -t root@192.168.144.213 sudo docker rm webapp1
+                ssh -t root@192.168.144.213 sudo docker run --name webapp1 -p 8088:80 -d jenkins_app
+                
+                '''
+            }
+        }
+        
+        
+        stage('Run-python3'){
+            steps{
+            sh '''
+                #ssh root@192.168.144.206 'cd /nfs/slurm-rpms/ && sbatch myscript1.sh'
+                #ssh -t root@192.168.144.206 'cd /practice/jenkins-demo && git pull'
+                #ssh -t root@192.168.144.206 'cd /practice/jenkins-demo && python3 python1.py'
+            
+              '''
+            }
+        }
+    }
+}
